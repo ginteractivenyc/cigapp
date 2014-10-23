@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "_default": {
+            "link": "cigar clique"
+        }, 
+        "cigar clique": {
+            "applicationId": "7aIsf4kOGwWpoDDxN91lbgTvUtBxWmiwOUZSd7KB", 
+            "masterKey": "jGOC6afpcWZaRedrm8qxoVdfGbiRDv9b1wVqQz2l"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.0"
+    }
+}

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+		<meta charset="utf-8" />
+		<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+		<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+			<meta name="msapplication-tap-highlight" content="no" />
+			<title>Cigar Clique</title>
+		</head>
+		<body>
+			<div class="bgstatusbar"></div>
+			<!--home-->
+			<div id="homePage">
+				<!--logo-->
+				<img class="logohome" src="img/logo.png">
+				<!--<div id="hometitle">
+					<span class="tagline">A cigar enthusiast's <br/>best friend.</span>
+				</div>-->
+
+				<!--home buttons-->
+				<form id="signup">
+					<input  id="signup-username" placeholder="Enter a Username">
+					<input type="password"  id="signup-password" placeholder="Set a password">
+					<div id="signupbutton">CLIQUE</div>
+					<div id="logtext"> <span>Already have an account?</span><span id="logmein"> LOGIN</span></div>
+					<img src="img/fblogin.png" id="fblogin">
+					<!--<span id="subtitle">Smoke, Share, <span style="color:#d19538;">Clique.</span></span>-->
+				</form>
+
+				<form id="login">
+					<input  id="login-username" placeholder="Enter a Username">
+					<input type="password" id="login-password" placeholder="Enter password">
+					<div id="loginbutton">LOGIN</div>
+					<input id="fb-email" placeholder="Enter Facebook Email">
+					<span id="signmeup">SIGN UP</span>
+				</form>
+			</div>
+			
+
+			<div id="appContainer" class="pagesection">
+				<div id="dbHeader" class="brandDBTitle">
+					<img src="img/prevarrow.png" class="indicatorsLeft">
+					<img src="img/addcig.png" class="indicatorsAdd">
+					<img src="img/updatestatus.png" class="statuscue">
+					<span id="brandTitle"></span>
+					<!--<img src="img/nextarrow.png" class="indicatorsRight">-->
+				</div>
+
+				<!-- statusupdate-->
+				<div class="mainsection" id="statusUpdate">
+					<div id="statusPost"></div>
+				</div>
+
+				<!-- statusform-->
+				<div class="mainsection" id="statusInnerWrapper" >
+					<img src="img/closestatus.png" class="closestatus statusclose">
+						<!--<img class="previewupload"/>-->
+						<img id="resultImage">
+
+
+					<form id="statusform" name="statusupdate">		
+						<div class="fileUpload">
+							<!--<span class="camera"></span>-->
+						<!--<input type="file" id="fileselect" class="upload" >-->
+						<textarea  id="statusupdateform" placeholder="leave a comment"></textarea>
+
+						</div>
+		
+					</form>
+					<div class="camera"></div>
+					<div id="uploadBtn">
+							<span class="postbtn">Post</span>
+					</div>
+				</div>
+
+				<!-- cigar db-->
+				<div class="mainsection" id="cigardatabase">
+					<div id="brandWrapper" class="cigardb">
+						<ul id="cigardbWrapper">
+						</ul>
+					</div>
+				</div>
+
+				<!--cigar names list-->
+				<div id="cigarslistNameWrapper" class="dark mainsection"></div>
+				<!-- cigar view-->
+				<div id="cigarslistWrapper" class="dark mainsection"></div>
+				<!--cigar submit form-->
+				<div id="cigarslistForm" class="submitform mainsection">
+					<img src="img/closestatus.png" class="closestatus">
+					<div id="submitCigar">Add Cigar</div>
+					<form id="cigarSubmit">
+						<input  id="brandSubmit" placeholder="Brand">
+						<input  id="nameSubmit" placeholder="Cigar Name">
+						<input  id="strengthSubmit" placeholder="Strength">
+						<input  id="wrapperSubmit" placeholder="Wrapper">
+						<input  id="originSubmit" placeholder="Origin">
+					</form>
+				</div>
+
+				<!-- locate-->
+				<div class="mainsection" id="locatePage">
+					<div id="results">
+					    <ul id="places"></ul>
+				    </div>
+				<!--<button id="more">More results</button>-->
+			     </div>
+
+			<!--google map-->
+			<div id="mapWrapperOuter" class="mainsection">
+				<div id="mapWrapper">
+					<div id="geoLocation"></div>
+				</div>
+				<a href="" id="clickcall"><span>Call</span></a>
+				<div id="smsBtn"><span>SMS</span></div>
+			</div>
+			<!--listPage-->
+			<div class="mainsection" id="listPage">
+				<!-- <img class="logolist" src="img/logo.png">-->
+				<div class="form-area">
+					<form id="tasks-form" name="tasks-form">
+						<label for="task">Keep track of smokes you want to
+						try. Enter a cigar brand and the cigar below.</label>
+						<input  id="task" placeholder="Cigar Brand">
+					</form>
+					<form id="cigarname" name="cigarname">
+						<input  id="cigar" placeholder="Cigar Name">
+					</form>
+				</div>
+			<ul id="tasks"></ul>
+		</div>
+		<!--footer-->
+		<div id="cigarfooter">
+			<ul id="footercigar">
+				<li><img id="myhumidoricon" src="img/myhumidor.png"></li>
+				<li><img id="cigarlisticon" src="img/cigarlist.png"></li>
+				<li><img id="locateicon" src="img/locateicon.png"></li>
+				<li><img id="updateicon" src="img/updateicon.png"></li>
+			</ul>
+		</div>
+		<!--end of container-->
+	</div>
+
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/parse-1.2.19.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true&libraries=places"></script>
+	<script type="text/javascript" src="js/facebookConnectPlugin.js"></script>
+	<script type="text/javascript" src="js/fastclick.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/app3.js"></script>
+	<script type="text/javascript" src="js/cigardb.js"></script>
+</body>
+</html>
