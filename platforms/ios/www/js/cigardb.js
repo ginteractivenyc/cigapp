@@ -437,9 +437,9 @@ function toTitleCase(str) {
 
             $('#appContainer').append('<div class="commentBox dbWrap mainsection"><img src="img/closestatus.png" class="closestatus"></div>');
 
-            $('.commentBox').append('<textarea class="commentSubmit" id="commentarea"></textarea><div class="sendComment" style="color:#ffffff;">Send</div>');
+            $('.commentBox').append('<textarea class="commentSubmit" id="reviewarea"> </textarea><div class="sendComment" style="color:#ffffff;">Send</div>');
             $('.sendComment').fadeTo(200, 0.4);
-            $('#commentarea').val().length = "";
+            $('#reviewarea').val().length = "";
             setTimeout(function() {
                 $('.commentBox').css('visibility', 'visible');
                 $('.commentBox').addClass('slideLeft');
@@ -459,7 +459,7 @@ function toTitleCase(str) {
             });
             // validate form
             $('.sendComment').click(function() {
-                var val = document.getElementById('commentarea').value;
+                var val = document.getElementById('reviewarea').value;
                 if (/^\s*$/g.test(val)) {
                     enterreviewAlert();
                     return false;

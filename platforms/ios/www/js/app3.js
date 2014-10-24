@@ -811,6 +811,9 @@ alert("Posts are loading");
 
     }
 
+
+
+
     function likeClick() {
         $('.likeBtn').unbind();
         //send Like
