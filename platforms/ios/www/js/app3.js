@@ -209,11 +209,7 @@ $("#login").keyup(function(event){
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
-                            $('body').append('<img src="img/usercue.jpg?v=2" id="usercueintro">');
-                            $('body').append('<div id="closeUser">Proceed</div>');
-                                $('#closeUser').click(function(){
-                                    closeCue();
-                                });
+                                         
                             // Do stuff after successful login.
 
                         }
