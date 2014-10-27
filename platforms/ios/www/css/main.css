@@ -604,7 +604,7 @@ display:none!important;
 
 .logohome {
 width:50%;
-display:none;
+display:block;
 position: absolute;
 left:26%;
 top:80px;

@@ -363,9 +363,13 @@ $('.logohome').hide();
         $(this).addClass('tapActive');
         $('#resultImage').remove();
         navigator.camera.getPicture(gotPic, onFail, {
-            quality: 50,
+            quality: 10,
             destinationType: navigator.camera.DestinationType.DATA_URL,
-            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY
+            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300
+
+
         });
 
     });
