@@ -362,17 +362,31 @@ $('.logohome').hide();
     $(".camera").on("click", function() {
         $(this).addClass('tapActive');
         $('#resultImage').remove();
-        navigator.camera.getPicture(gotPic, onFail, {
-            quality: 10,
-            destinationType: navigator.camera.DestinationType.DATA_URL,
-            sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-            encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 300
-
-
+        $('.cameraAlert').show();
+            $('#takePhoto').click(function(){
+            navigator.camera.getPicture(gotPic, onFail, {
+                quality: 10,
+                destinationType: navigator.camera.DestinationType.DATA_URL,
+                sourceType: navigator.camera.PictureSourceType.CAMERA,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 300
+            });
         });
 
+            $('#choosePhoto').click(function(){
+            navigator.camera.getPicture(gotPic, onFail, {
+                quality: 10,
+                destinationType: navigator.camera.DestinationType.DATA_URL,
+                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 300
+            });
+        });
     });
+
+
+
+
 
     function gotPic(data) {
 

@@ -73,6 +73,13 @@
 						</div>
 		
 					</form>
+					<div class="cameraAlert">
+						<ul>
+							<li id="takePhoto">Take a Photo</li>
+							<li id="choosePhoto">Photo Library</li>
+						</ul>
+
+					</div>
 					<div class="camera"></div>
 					<div id="uploadBtn">
 							<span class="postbtn">Post</span>
@@ -98,9 +105,35 @@
 					<form id="cigarSubmit">
 						<input  id="brandSubmit" placeholder="Brand">
 						<input  id="nameSubmit" placeholder="Cigar Name">
-						<input  id="strengthSubmit" placeholder="Strength">
-						<input  id="wrapperSubmit" placeholder="Wrapper">
-						<input  id="originSubmit" placeholder="Origin">
+						<select id="strengthSubmit">
+							<option value="" disabled selected>Strength</option>
+							<option value="Mild">Mild</option>
+							<option value="Medium">Medium</option>
+							<option value="Medium-Full">Medium-Full</option>
+							<option value="Full">Full</option>
+
+						</select>
+						<select id="wrapperSubmit">
+							<option value="" disabled selected>Wrapper</option>
+							<option value="Candela">Candela</option>
+							<option value="Connecticut">Connecticut</option>
+							<option value="Corojo">Corojo</option>
+							<option value="Criollo">Criollo</option>
+							<option value="Sumatra">Sumatra</option>
+							<option value="Habano">Habano</option>
+							<option value="Maduro">Maduro</option>
+							<option value="Oscuro">Oscuro</option>
+							<option value="Cameroon">Cameroon</option>
+							<option value="Rosado">Rosado</option>
+						</select>
+
+						<select id="originSubmit">
+							<option value="" disabled selected>Origin</option>
+							<option value="Dominican Republic">Dominican Republic</option>
+							<option value="Honduras">Honduras</option>
+							<option value="Nicaragua">Nicaragua</option>
+			
+						</select>
 					</form>
 				</div>
 
