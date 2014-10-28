@@ -368,6 +368,7 @@ reviewClick();
 	$('.statusclose').click(function() {
 		$(this).addClass('tapActive');
 		$('#statusInnerWrapper').removeClass('slideLeft');
+		$('.cameraAlert').removeClass('slideLeft');
 		  /*setTimeout(function() {
             location.reload();
           }, 500);*/

@@ -362,8 +362,11 @@ $('.logohome').hide();
     $(".camera").on("click", function() {
         $(this).addClass('tapActive');
         $('#resultImage').remove();
-        $('.cameraAlert').show();
+        setTimeout(function(){
+        $('.cameraAlert').addClass('slideLeft');
+    },350);
             $('#takePhoto').click(function(){
+                 $(this).addClass('tapActive');
             navigator.camera.getPicture(gotPic, onFail, {
                 quality: 10,
                 destinationType: navigator.camera.DestinationType.DATA_URL,
@@ -374,6 +377,7 @@ $('.logohome').hide();
         });
 
             $('#choosePhoto').click(function(){
+                 $(this).addClass('tapActive');
             navigator.camera.getPicture(gotPic, onFail, {
                 quality: 10,
                 destinationType: navigator.camera.DestinationType.DATA_URL,
@@ -382,6 +386,12 @@ $('.logohome').hide();
                 targetWidth: 300
             });
         });
+            $('#cancelPhoto').click(function(){
+                 $(this).addClass('tapActive');
+            setTimeout(function(){
+        $('.cameraAlert').removeClass('slideLeft');
+                },50);
+            });
     });
 
 
