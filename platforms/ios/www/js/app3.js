@@ -81,7 +81,7 @@ function keyboardShowHandler(e){
                                 $('form#signup').hide();
                                 $('form#login').fadeIn();
 
-                                }, 200);
+                                }, 300);
                             }
                         });
                     });
@@ -332,12 +332,13 @@ $("#login").keyup(function(event){
     //update status
     $('.statuscue').click(function(e) {
         $(this).addClass('tapActive');
+
 $('.logohome').hide();
         setTimeout(function() {
             $('#statusInnerWrapper').css('visibility', 'visible');
             $('#statusInnerWrapper').addClass('slideLeft');
             $('.previewupload, #resultImage').attr('src', '');
-
+            $('.statuscue').removeClass('tapActive');
         }, 300);
 
     });
@@ -791,11 +792,15 @@ alert("Posts are loading");
                 $('.commentBox').css('visibility', 'visible');
                 $('.commentBox').addClass('slideLeft');
             }, 300);
-            $('.closestatus').click(function() {
-                $('.commentBox').removeClass('slideLeft');
-
-
-            });
+        $('.closestatus').click(function() {
+        $(this).addClass('tapActive');
+    setTimeout(function() {
+         $('.closestatus').removeClass('tapActive');
+        setTimeout(function() {
+        $('.commentBox').removeClass('slideLeft');
+            },200);     
+       }, 150);
+    });
             //adjust click here color
             $('.commentSubmit').focus(function(e) {
                 e.preventDefault();

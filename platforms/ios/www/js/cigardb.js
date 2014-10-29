@@ -351,27 +351,39 @@ reviewClick();
 		$(this).addClass('tapActive');
 		$('#brandSubmit, #nameSubmit, #strengthSubmit, #wrapperSubmit, #originSubmit').val('');
 
-		setTimeout(function() {
-			$('#cigarslistForm').css('visibility', 'visible');
+
+		  setTimeout(function() {
+           $('.indicatorsAdd').removeClass('tapActive');
+           	setTimeout(function() {
+           	$('#cigarslistForm').css('visibility', 'visible');
 			$('#cigarslistForm').addClass('slideLeft');
-		}, 200);
+			},200);
+          }, 150);
+
 
 	});
 
 
 	$('.closestatus').click(function() {
 		$(this).addClass('tapActive');
+	setTimeout(function() {
+		 $('.closestatus').removeClass('tapActive');
+		setTimeout(function() {
 		$('#cigarslistForm').removeClass('slideLeft');
-
+			},200);		
+       }, 150);
 	});
 
 	$('.statusclose').click(function() {
 		$(this).addClass('tapActive');
-		$('#statusInnerWrapper').removeClass('slideLeft');
-		$('.cameraAlert').removeClass('slideLeft');
-		  /*setTimeout(function() {
-            location.reload();
-          }, 500);*/
+
+		  setTimeout(function() {
+           $('.statuscue').removeClass('tapActive');
+           	setTimeout(function() {
+           	$('#statusInnerWrapper').removeClass('slideLeft');
+			$('.cameraAlert').removeClass('slideLeft');
+			},200);
+          }, 150);
 
 	});
 
@@ -445,11 +457,16 @@ function toTitleCase(str) {
                 $('.commentBox').css('visibility', 'visible');
                 $('.commentBox').addClass('slideLeft');
             }, 300);
-            $('.closestatus').click(function() {
-                $('.commentBox').removeClass('slideLeft');
-
-
-            });
+   
+	$('.closestatus').click(function() {
+		$(this).addClass('tapActive');
+	setTimeout(function() {
+		 $('.closestatus').removeClass('tapActive');
+		setTimeout(function() {
+		$('.commentBox').removeClass('slideLeft');
+			},200);		
+       }, 150);
+	});
             //adjust click here color
             $('.commentSubmit').focus(function(e) {
                 e.preventDefault();
