@@ -393,6 +393,7 @@ reviewClick();
 		if ($('#cigardatabase').hasClass('level2')) {
 			$('#cigarslistNameWrapper').removeClass('slideLeft');
 			setTimeout(function() {
+				$('.indicatorsLeft').removeClass('tapActive');
 				$('#cigardatabase').show();
 
 			}, 300);
@@ -405,6 +406,7 @@ reviewClick();
 		if ($('#cigardatabase').hasClass('level3')) {
 			$('#cigarslistWrapper').removeClass('slideLeft');
 			setTimeout(function() {
+				$('.indicatorsLeft').removeClass('tapActive');
 				$('#cigarslistNameWrapper').show();
 			}, 300);
 			$('#cigardatabase').removeClass('level3');
@@ -452,7 +454,7 @@ function toTitleCase(str) {
 
             $('.commentBox').append('<textarea class="commentSubmit" id="reviewarea"> </textarea><div class="sendComment" style="color:#ffffff;">Send</div>');
             $('.sendComment').fadeTo(200, 0.4);
-            $('#reviewarea').val().length = "";
+            $('#reviewarea').val().length = 0;
             setTimeout(function() {
                 $('.commentBox').css('visibility', 'visible');
                 $('.commentBox').addClass('slideLeft');
@@ -477,11 +479,11 @@ function toTitleCase(str) {
             });
             // validate form
             $('.sendComment').click(function() {
-                var val = document.getElementById('reviewarea').value;
-                if (/^\s*$/g.test(val)) {
+                var val = $('#reviewarea');
+                if (val.val().length <= 1) {
                     enterreviewAlert();
-                    return false;
-                } else {
+                    //return false;
+                } else if (val.val().length >= 2) {
                     var currentUser = Parse.User.current();
                     var commentItem = $('.commentSubmit').val();
                     var nameCurrent = currentUser.getUsername();

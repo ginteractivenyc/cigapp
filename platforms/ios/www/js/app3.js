@@ -787,7 +787,7 @@ alert("Posts are loading");
             $('.commentBox').find('#commentBtn').remove();
             $('.commentBox').append('<textarea class="commentSubmit" id="commentarea"></textarea><div class="sendComment" style="color:#ffffff;">Send</div>');
             $('.sendComment').fadeTo(200, 0.4);
-            $('#commentarea').val().length = "";
+            $('#commentarea').val().length = 0;
             setTimeout(function() {
                 $('.commentBox').css('visibility', 'visible');
                 $('.commentBox').addClass('slideLeft');
@@ -811,11 +811,11 @@ alert("Posts are loading");
             });
             // validate form
             $('.sendComment').click(function() {
-                var val = document.getElementById('commentarea').value;
-                if (/^\s*$/g.test(val)) {
+                var val = $('#commentarea');
+                if (val.val().length <= 1) {
                     entercommentAlert();
-                    return false;
-                } else {
+                    //return false;
+                } else if (val.val().length >= 2) {
                     var currentUser = Parse.User.current();
                     var commentItem = $('.commentSubmit').val();
                     var nameCurrent = currentUser.getUsername();
