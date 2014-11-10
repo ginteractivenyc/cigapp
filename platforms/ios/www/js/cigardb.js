@@ -266,8 +266,20 @@ reviewClick();
 
 	});*/
 
+$("#strengthSubmit").change(function () {
+        $(this).removeClass("inactiveselect");
+        $(this).addClass('activeselect');
+    });
 
+$("#wrapperSubmit").change(function () {
+        $(this).removeClass("inactiveselect");
+        $(this).addClass('activeselect');
+    });
 
+$("#originSubmit").change(function () {
+        $(this).removeClass("inactiveselect");
+        $(this).addClass('activeselect');
+    });
 	//submit a cigar
 	$('#submitCigar').click(function() {
 

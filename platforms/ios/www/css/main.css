@@ -20,7 +20,6 @@ display: block;
 margin: 7px;
 font-family:'Montserrat',sans-serif;
 background: #000!important;
-color: #c4c4c4;
 height:30px;
 font-size:13px;
 letter-spacing:1px;
@@ -28,6 +27,15 @@ text-transform: uppercase;
 border: 1px solid rgba(255,255,255,0.3);
 -webkit-appearance: none;
 
+}
+
+.inactiveselect{
+    color: #c4c4c4;
+
+}
+
+.activeselect{
+    color:#d19538!important;
 }
 #strengthSubmit{
     margin-top:14px;
@@ -299,11 +307,11 @@ top: 5px;
 }
 
 #statusupdateform, .commentSubmit {
-width: 280px;
+width: 240px;
 height: 50px;
 background: #c4c4c4;
 margin-left: 8px;
-/* padding-left: 110px; */
+padding-left: 45px;
 font-size: 13px;
 border-radius: 0!important;
 }
