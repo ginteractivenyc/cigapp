@@ -378,7 +378,7 @@ reviewClick();
 		$(this).addClass('tapActive');
 
 		  setTimeout(function() {
-           $('.statuscue').removeClass('tapActive');
+           $('.statusclose, .statuscue, #uploadBtn').removeClass('tapActive');
            	setTimeout(function() {
            	$('#statusInnerWrapper').removeClass('slideLeft');
 			$('.cameraAlert').removeClass('slideLeft');

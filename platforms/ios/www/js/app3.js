@@ -78,8 +78,8 @@ function keyboardShowHandler(e){
                             error: function(user, error) {
                                 fbUserAlert();
                                 setTimeout(function(){
-                                $('form#signup').hide();
-                                $('form#login').fadeIn();
+                                $('form#signup, form#login, form#signup, #signupbutton, #logtext, #forgottext, #fblogin, #passwordReset').hide();
+                                $('form#fbLoginEmail').fadeIn();
 
                                 }, 300);
                             }
@@ -125,9 +125,15 @@ $("#signup").keyup(function(event){
 });
 
         $('#signupbutton').click(function() {
+            var user = new Parse.User();
             var username = $("#signup-username").val().toLowerCase();
             var password = $("#signup-password").val();
-            Parse.User.signUp(username, password, {}, {
+            var email = $("#signup-email").val().toLowerCase();
+           user.set("username", username);
+            user.set("password", password);
+            user.set("email", email);
+         
+            user.signUp(null,{
                 success: function(user) {
                     userArrayLogged.length = 0;
                     userArrayLogged.push(username);
@@ -160,7 +166,7 @@ $("#signup").keyup(function(event){
 
     $('#logmein').click(function() {
 
-        $('form#signup').hide();
+        $('form#signup, #signupbutton, #logtext, #forgottext, #fblogin').hide();
         $('form#login').hide().fadeIn(350);
 
     });
@@ -172,61 +178,29 @@ $("#login").keyup(function(event){
     }
 });
 
-    $('#signmeup').click(function() {
+    $('#signmeup, #signmeup2').click(function() {
 
-        $('form#login').hide();
-        $('form#signup').hide().fadeIn(350);
+        $('form#login, form#passwordReset, #resetSuccess').hide();
+        $('form#signup, #signupbutton, #logtext, #forgottext, #fblogin').hide().fadeIn(350);
 
     });
 
 
        $('#loginbutton').click(function() {
-        var usernamelogged = $("#login-username").val().toLowerCase();
+        var emaillogged = $("#login-email").val().toLowerCase();
         var passwordlogged = $("#login-password").val();
-        if(usernamelogged.length === 0){
+        if(emaillogged.length === 0){
             signupAlert();
         }
         var queryUser = new Parse.Query(Parse.User);
-        queryUser.equalTo("username", usernamelogged);
+        queryUser.equalTo("email", emaillogged);
         queryUser.first({
             success: function(resultEmail) {
-                var resultEmailString = resultEmail.get("email")
-                if (resultEmail.get("fbuser") === "yes") {
-                    $('#loginbutton').addClass('fbactive');
-                    $('#login-username, #login-password').fadeOut(350, function() {
-                        $('#fb-email').fadeIn(350);
-
-                        $('.fbactive').click(function() {
-                            var emailVal = $("#fb-email").val().toLowerCase();;
-                            if(emailVal === resultEmailString ){
-                    Parse.User.logIn(usernamelogged, "fbuser", {
+                var resultuser = resultEmail.get("username")
+                  Parse.User.logIn(resultuser, passwordlogged, {
                         success: function(user) {
-                            userArrayLogged.length = 0;
-                            userArrayLogged.push(usernamelogged);
-                            $('form#login, #homePage, .logohome').hide();
-                            $('.indicatorsLeft, .indicatorsAdd').hide();
-                            $('#statusUpdate, .statuscue').show('');
-                            $('#dbHeader').show();
-                            $('#cigarfooter').show();
-                            $('#brandTitle').html('CLIQUE FEED');
-                                         
-                            // Do stuff after successful login.
-
-                        }
-                    });
-                }
-                else{
-
-                    wrongEmailAlert();
-                }
-              });
-             });
-             }
-                else {
-                    Parse.User.logIn(usernamelogged, passwordlogged, {
-                        success: function(user) {
-                            userArrayLogged.length = 0;
-                            userArrayLogged.push(usernamelogged);
+                            resultuser.length = 0;
+                            userArrayLogged.push(resultuser);
                             $('form#signup, #homePage, #hometitle, .logohome').hide();
                             $('.indicatorsLeft, .indicatorsAdd').hide();
                             $('#statusUpdate, .statuscue').show('');
@@ -246,14 +220,78 @@ $("#login").keyup(function(event){
                             // The login failed. Check error to see why.
                         }
                     });
-                }
-            },
-            error: function(user, error) {
-                alert("Error: " + error.code + " " + error.message);
-            }
 
+              },
+              error: function(error){
+                wrongEmailAlert();
+              }
+             });
+             });
+
+    
+
+//forgot password
+
+$('#passwordresetbtn').click(function(){
+        $('form#signup, #signupbutton, #logtext, #forgottext, #fblogin').hide();
+        $('form#passwordReset, #signmeup2').fadeIn();
+
+        $('#resetpbutton').click(function(){
+            var emailReset = $('#reset-email').val().toLowerCase();
+            Parse.User.requestPasswordReset(emailReset, {
+                success: function() {
+                    $('#resetSuccess').show().html('Weve sent intructions on resetting your password to' + emailReset);
+                    $('#resetpbutton, #reset-email').hide();
+                    // Password reset request was sent successfully
+                },
+                error: function(error) {
+                    // Show the error message somewhere
+                    alert("Error: " + error.code + " " + error.message);
+                }
+            });
         });
+});
+
+
+
+//fb already signed up
+
+
+        $('#loginfbbutton').click(function(){
+            var emailReset = $('#fb-loginemail').val().toLowerCase();
+            var queryUser = new Parse.Query(Parse.User);
+        queryUser.equalTo("email", emailReset);
+        queryUser.first({
+            success: function(resultEmail) {
+                var resultuser = resultEmail.get("username");
+                 var resultpswd = resultEmail.get("password");
+                  Parse.User.logIn(resultuser, "fbuser", {
+                        success: function(user) {
+                            resultuser.length = 0;
+                            userArrayLogged.push(resultuser);
+                            $('form#signup, #homePage, #hometitle, .logohome').hide();
+                            $('.indicatorsLeft, .indicatorsAdd').hide();
+                            $('#statusUpdate, .statuscue').show('');
+                            $('#dbHeader').show();
+                            $('#cigarfooter').show();
+                            $('#brandTitle').html('CLIQUE FEED');
+                             $('body').append('<img src="img/usercue.jpg?v=2" id="usercueintro">');
+                            $('body').append('<div id="closeUser">Proceed</div>');
+                                $('#closeUser').click(function(){
+                                    closeCue();
+                                });
+                            // Do stuff after successful login.
+
+                        },
+                        error: function(user, error) {
+                            wronguserAlert();
+                            // The login failed. Check error to see why.
+                        }
+                    });
+
+        }
     });
+});
 
 
    /* $('#loginbuttonFB').click(function() {
@@ -413,12 +451,18 @@ $('.logohome').hide();
 
     $('#uploadBtn').click(function() {
         $(this).addClass('tapActive');
+        if($('#resultImage').attr('src') === ""){
+           selectphotoAlert(); 
+        }
+        else{
         //alert(baseArray);
         submitPic();
+    }
     });
 
 
     function submitPic() {
+
         var sendThis = $('#resultImage').attr('src');
         var parseFile = new Parse.File("mypic.jpg", {
             base64: sendThis
@@ -435,10 +479,13 @@ $('.logohome').hide();
             cigarWall.set("imagefile", parseFile);
             cigarWall.save({
                 success: function() {
+                    $('#uploadBtn').removeClass('tapActive');
+
                     var postupdate = cigarWall.get('statusupdate');
                     //$('#fileselect').attr('data-change', 'false');
                     $('#statusInnerWrapper').removeClass('slideLeft');
                     location.reload();
+
 
 
                 },
@@ -855,9 +902,11 @@ alert("Posts are loading");
                 var closestID = $(this).parent().closest('.cigarpost').attr('id');
                 //console.log(closestID);
                 $(this).parent().closest('.cigarpost').find('.likeposted:last-child').remove();
-                if($('.likesbox:empty').length){
-                   $(this).parent().closest('.cigarpost').find('.likeicon').hide();
+                $(this).parent().closest('.cigarpost').find('.likeposted:last-child').find('.comma:last-child').hide();
 
+                if( $(this).parent().parent().find('.likesbox').is(':empty')) {
+                   
+                   $(this).parent().parent().find('.likeicon').hide();
                 }
 
                 $(this).find('img').attr('src', 'img/likeBtn.png');
@@ -1901,7 +1950,7 @@ function createMarkers(places) {
                         });
                     });
                 } else {
-                    alert("Geocode was not successful for the following reason: " + status);
+                    locationAlert();
                 }
 
 
@@ -1914,7 +1963,7 @@ function createMarkers(places) {
 }
 
 function onError(error) {
-    alert('message: ' + "Geolocation for Cigar Clique denied" + '\n');
+    locationAlert();
 }
 
 function shareSMS() {
@@ -2050,7 +2099,9 @@ for(i=0; i < elelist.length; i++){
             // do something
         } 
 
-
+        function alertDismissed11() {
+            // do something
+        } 
 
     // Show a custom alertDismissed
     //
@@ -2075,7 +2126,7 @@ for(i=0; i < elelist.length; i++){
 
         function fbUserAlert() {
         navigator.notification.alert(
-            'Enter your Facebook Username. You will be prompted to enter your Facebook e-mail.',  // message
+            'Enter your Facebook Email. You will receive instructions on resetting your password.',  // message
             alertDismissed3,         // callback
             'Cigar Clique',            // title
             'Ok'                  // buttonName
@@ -2147,5 +2198,12 @@ for(i=0; i < elelist.length; i++){
         );
     }
 
-
+        function locationAlert() {
+        navigator.notification.alert(
+            'Please Turn On Location Services For Cigar Clique',  // message
+            alertDismissed11,         // callback
+            'Cigar Clique',            // title
+            'Ok'                  // buttonName
+        );
+    }
     

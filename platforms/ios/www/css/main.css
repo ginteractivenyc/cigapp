@@ -192,15 +192,15 @@ top: 5px;
 }
 
 .tapActive{
-  animation: tapAnimation linear 400ms;
+  animation: tapAnimation linear 800ms;
   animation-iteration-count: 1;
-  -webkit-animation: tapAnimation linear  400ms;
+  -webkit-animation: tapAnimation linear  800ms;
   -webkit-animation-iteration-count: 1;
-  -moz-animation: tapAnimation linear  400ms;
+  -moz-animation: tapAnimation linear  800ms;
   -moz-animation-iteration-count: 1;
-  -o-animation: tapAnimation linear  400ms;
+  -o-animation: tapAnimation linear  800ms;
   -o-animation-iteration-count: 1;
-  -ms-animation: tapAnimation linear  400ms;
+  -ms-animation: tapAnimation linear  800ms;
   -ms-animation-iteration-count: 1;
 }
 @keyframes tapAnimation{
@@ -209,11 +209,11 @@ top: 5px;
     transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     transform:  ;
   }
   100% {
@@ -228,11 +228,11 @@ top: 5px;
     -moz-transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     -moz-transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     -moz-transform:  ;
   }
   100% {
@@ -247,11 +247,11 @@ top: 5px;
     -webkit-transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     -webkit-transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     -webkit-transform:  ;
   }
   100% {
@@ -266,11 +266,11 @@ top: 5px;
     -o-transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     -o-transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     -o-transform:  ;
   }
   100% {
@@ -285,11 +285,11 @@ top: 5px;
     -ms-transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     -ms-transform:  ;
   }
   50% {
-    opacity:0.5;
+    opacity:0.3;
     -ms-transform:  ;
   }
   100% {
@@ -624,11 +624,11 @@ display:none!important;
 
 
 .logohome {
-width:50%;
-display:block;
+width: 40%;
+display: block;
 position: absolute;
-left:26%;
-top:80px;
+left: 30%;
+top: 70px;
 
 }
 
@@ -1248,19 +1248,19 @@ textarea#status {
 
 
 /*sign up form styles*/
-form#signup,form#login {
+form#signup,form#login, form#passwordReset , form#fbLoginEmail {
     display:none;
     width:320px;
     /*border:1px solid #7F5A1F;*/
-    height:180px;
+    height:100px;
     position:absolute;
-    top:180px;
+    top:140px;
     left:0;
     z-index: 99999999;
 }
 
 
-form#signup input, form#login input {
+form#signup input, form#login input, form#passwordReset input, form#fbLoginEmail input {
 background: rgba(0,0,0,0.8);
 width: 63%;
 height: 25px;
@@ -1305,32 +1305,58 @@ form#login input#fb-email{
 }
 
 
-#logtext {
+#logtext, #forgottext {
     color:#c4c4c4;
     display:block;
     text-align:center;
-    padding-top:25px;
     font-size:12px;
 }
 
-#logmein, #signmeup {
+#logtext{
+    position: absolute;
+top: 450px;
+left: 10%;
+}
+
+#resetSuccess{
+position: absolute;
+top: 150px;
+color: #ffffff;
+font-size: 13px;
+line-height: 14px;
+text-align: center;
+display: none;
+}
+
+#forgottext{
+    position: absolute;
+top: 480px;
+left: 6%;
+}
+
+#logmein, #signmeup , #passwordresetbtn, #signmeup2{
     color:#d19538;
 }
 
-#signmeup {
+#signmeup, #signmeup2 {
     color:#d19538;
 font-size: 11px;
 display: block;
-margin:20px auto;
 /* position: relative; */
 text-align: center;
+top: 160px;
+left: 40%;
+position: absolute;
 }
 
-#signupbutton,#loginbutton {
+#signmeup2{
+    top:110px;
+}
+
+#signupbutton,#loginbutton, #resetpbutton, #loginfbbutton {
     background:#d19538!important;
     width:150px!important;
     height:35px!important;
-    margin-top:20px!important;
     color:#000;
     font-family:'Montserrat',sans-serif;
     text-transform:uppercase;
@@ -1338,7 +1364,17 @@ text-align: center;
     font-size:16px;
     line-height:35px;
     text-align:center;
-    margin:0 auto;
+position: absolute;
+top: 300px;
+left: 27%;
+}
+
+#loginbutton{
+    top:110px;
+}
+
+#resetpbutton, #loginfbbutton{
+    top:60px;
 }
 
 ::-webkit-input-placeholder {
@@ -1423,9 +1459,11 @@ text-align: center;
 
 
 #fblogin{
-    width: 65%;
-    display: block;
-    margin: 20px auto;
+width: 65%;
+display: block;
+left: 17%;
+top: 377px;
+position: absolute;
 }
 
 #usercueintro{
