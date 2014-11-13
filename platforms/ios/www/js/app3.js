@@ -207,8 +207,7 @@ $("#login").keyup(function(event){
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
-                             $('body').append('<img src="img/usercue.jpg?v=2" id="usercueintro">');
-                            $('body').append('<div id="closeUser">Proceed</div>');
+                             $('#userSlider').show();
                                 $('#closeUser').click(function(){
                                     closeCue();
                                 });
@@ -445,6 +444,7 @@ $('.logohome').hide();
         dataurl = "data:image/jpeg;base64," + data;
         //preview image
         $('#resultImage').attr('src', dataurl);
+        $('#statusupdateform').addClass('adjustTextArea');
         //user submits selected photo
     }
 
@@ -1136,13 +1136,24 @@ alert("Posts are loading");
     });
 */
     $("#cigarname, #tasks-form").submit(function() {
-        if ($("#task").val() === "") {
+
+var length = 12;
+var lengthName = 8;
+var myString = $("#task").val();
+var mynameString = $("#cigar").val();
+
+var myTruncatedString = myString.substring(0,length);
+var myTruncatedNameString = mynameString.substring(0,lengthName);
+
+
+
+        if (myString === "") {
             humidorAlert();
-        } else if ($("#task").val() != "") {
-            localStorage.setItem('task-' + $("#task").val() + $("#cigar").val(), $("#task").val() + ' ' + $("#cigar").val());
-            $("#tasks").append('<li id="task-' + $("#task").val() + '">' + '<span class="taskSpan">' + $("#task").val() + ' ' + $("#cigar").val() + '</span>' + '<img src="img/closestatus.png" class="removeThis">' + '</li>')
-            $("#" + $("#task").val()).css('display', 'none');
-            $("#" + $("#task").val()).fadeIn(350);
+        } else if (myTruncatedString != "") {
+            localStorage.setItem('task-' + myTruncatedString + myTruncatedNameString, myTruncatedString + ' ' + myTruncatedNameString);
+            $("#tasks").append('<li id="task-' + myTruncatedString + '">' + '<span class="taskSpan">' + myTruncatedString + ' ' + myTruncatedNameString + '</span>' + '<img src="img/closestatus.png" class="removeThis">' + '</li>')
+            $("#" + myTruncatedString).css('display', 'none');
+            $("#" + myTruncatedString).fadeIn(350);
 
         }
 
