@@ -142,7 +142,7 @@ ul,li {
 
 .swipe {
   overflow: hidden;
-  /*visibility: hidden;*/
+visibility: hidden;
   position: relative;
 }
 .swipe-wrap {
@@ -155,12 +155,54 @@ ul,li {
   position: relative;
 }
 
+.swipe-wrap > div img{
+    width:100%;
+}
+
 #userSlider{
-    display:none;
+    display:block;
     position: absolute;
     top:0;
-    z-index:99999;
+    z-index:99999999999;
 }
+
+
+#bullets{
+position: fixed;
+bottom: 0;
+width: 100%;
+padding-bottom: 15px;
+padding-top: 15px;
+z-index: 99999999999999;
+}
+
+#position {
+  display: block;
+  font-size: 29px;
+  line-height: 5px;
+  margin-top: 8px;
+  text-align: center;
+   /*color: #D1C573;*/
+}
+
+
+#position em {
+  display: inline-block;
+  font-family: sans-serif;
+  font-style: normal;
+  padding: 0 1.5px;
+  color:#c4c4c4;
+}
+
+.bully{
+  color:#c4c4c4!important;
+}
+
+.on {
+  color:#d19538!important;
+}
+
+
 
 .dark {
     background:rgba(0,0,0,0.4);

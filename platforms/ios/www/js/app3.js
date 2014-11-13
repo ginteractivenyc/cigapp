@@ -27,6 +27,9 @@ function keyboardShowHandler(e){
     }, 0);
 }
 
+
+
+
     //fb functions
     var login = function() {
         var usernamelogged = [];
@@ -68,11 +71,26 @@ function keyboardShowHandler(e){
                                 $('#statusUpdate, #cigarfooter').show("slide", {
                                     direction: "right"
                                 }, 200);
-                            $('body').append('<img src="img/usercue.jpg?v=2" id="usercueintro">');
-                            $('body').append('<div id="closeUser">Proceed</div>');
-                                $('#closeUser').click(function(){
-                                    closeCue();
-                                });
+                                                    
+                             window.mySwipe = new Swipe(document.getElementById('userSlider'), {
+                              startSlide: 0,  
+                              speed: 400,
+                              continuous: false,
+                              disableScroll: false,
+                              stopPropagation: false,
+                              callback: function(index, elem) {},
+                              transitionEnd: function(index, elem) {
+                                if(window.mySwipe.getPos() === 3){
+                                    setTimeout(function(){
+                                        $('#userSlider').fadeOut(function(){
+                                        $('#userSlider').remove();
+                                        });
+                                    }, 700);
+                                }
+
+                              }
+                            }); 
+
 
                             },
                             error: function(user, error) {
@@ -101,6 +119,10 @@ function keyboardShowHandler(e){
         var nameCurrent = currentUser.getUsername();
         userArrayLogged.length = 0;
         userArrayLogged.push(nameCurrent);
+
+         $('#userSlider').fadeOut(function(){
+            $('#userSlider').remove();
+            });
         //$('body').append(nameCurrent + ' is logged in');
         $('#homePage, #form#signup, #hometitle, .logohome').hide();
         $('#dbHeader').show();
@@ -116,7 +138,36 @@ function keyboardShowHandler(e){
         //user signup
         $('form#signup').fadeIn();
 
+                             window.mySwipe = new Swipe(document.getElementById('userSlider'), {
 
+                             // startSlide: 0,  
+                             // speed: 400,
+                             // continuous: false,
+                             // disableScroll: false,
+                             // stopPropagation: false,
+                              callback: function(e, pos) {
+                                 var bullets = $('#position em');
+                                   
+                              //var i = bullets.length;
+                                bullets.className = '';
+
+                            var posi = window.mySwipe.getPos();
+                               bullets[posi].className = 'on';
+                               bullets[posi-1].className = '';
+                               bullets[posi+1].className = '';
+                               if(bullets[posi] === 0){
+                                bullets[1].className = 'bully';
+                               }
+                                },
+                              transitionEnd: function(index, elem) {
+                                if(window.mySwipe.getPos() === 4){
+                                        $('#userSlider, #bullets').fadeOut(function(){
+                                        $('#userSlider, #bullets').remove();
+                                        });
+                                }
+
+                              }
+                            });
 
 $("#signup").keyup(function(event){
     if(event.keyCode == 13){
@@ -145,12 +196,26 @@ $("#signup").keyup(function(event){
                     $('#statusUpdate, #cigarfooter').show("slide", {
                         direction: "right"
                     }, 200);
-                            $('body').append('<img src="img/usercue.jpg?v=2" id="usercueintro">');
-                            $('body').append('<div id="closeUser">Proceed</div>');
-                                $('#closeUser').click(function(){
-                                    closeCue();
-                                });            
+                                    
+                        
+                             window.mySwipe = new Swipe(document.getElementById('userSlider'), {
+                              startSlide: 0,  
+                              speed: 400,
+                              continuous: false,
+                              disableScroll: false,
+                              stopPropagation: false,
+                              callback: function(index, elem) {},
+                              transitionEnd: function(index, elem) {
+                                if(window.mySwipe.getPos() === 3){
+                                    setTimeout(function(){
+                                        $('#userSlider').fadeOut(function(){
+                                        $('#userSlider').remove();
+                                        });
+                                    }, 700);
+                                }
 
+                              }
+                            });  
 
                 },
                 error: function(user, error) {
@@ -208,9 +273,35 @@ $("#login").keyup(function(event){
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
                              $('#userSlider').show();
-                                $('#closeUser').click(function(){
-                                    closeCue();
-                                });
+    
+                             window.mySwipe = new Swipe(document.getElementById('userSlider'), {
+                              startSlide: 0,  
+                              speed: 400,
+                              continuous: false,
+                              disableScroll: false,
+                              stopPropagation: false,
+                              callback: function(e, pos) {
+                               
+                                var i = bullets.length;
+                                while (i--) {
+                                bullets[i].className = ' ';
+                                }
+                                bullets[pos].className = 'on';
+                         
+                                },
+                              transitionEnd: function(index, elem) {
+                                if(window.mySwipe.getPos() === 3){
+                                    setTimeout(function(){
+                                        $('#userSlider').fadeOut(function(){
+                                        $('#userSlider').remove();
+                                        });
+                                    }, 700);
+                                }
+
+                              }
+                            }),
+                            bullets = document.getElementById('position').getElementsByTagName('em');
+
                             // Do stuff after successful login.
 
                         },
@@ -644,7 +735,9 @@ $('#statusInnerWrapper').append('<img id="resultImage" src="">');
                 sharePost();
                 flagPost();
                 morePostsClick();
-
+                    /*if (results.length <= 2 ){
+                            $('#morePosts').hide();
+                        }*/
 
             },
             error: function(error) {
@@ -685,7 +778,6 @@ $('#statusInnerWrapper').append('<img id="resultImage" src="">');
             query.find({
                 success: function(results) {
 
-
                     // alert("Successfully retrieved " + results.length + ".");
                     imageURLs = [];
                     for (var i = 0; i < results.length; i++) {
@@ -701,6 +793,7 @@ $('#statusInnerWrapper').append('<img id="resultImage" src="">');
 
                     sharePost();
                     flagPost();
+
 
                     $('#morePosts').detach();
 
