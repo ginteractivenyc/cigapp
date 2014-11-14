@@ -926,13 +926,13 @@ alert("Posts are loading");
             });
             // validate form
             $('.sendComment').click(function() {
-                var val = $('#commentarea');
-                if (val.val().length <= 1) {
+                var valCom = $('#commentarea').val();
+                if (valCom.length <= 1) {
                     entercommentAlert();
                     //return false;
-                } else if (val.val().length >= 2) {
+                } else if (valCom.length >= 2) {
                     var currentUser = Parse.User.current();
-                    var commentItem = $('.commentSubmit').val();
+                    var commentItem = $('#commentarea').val();
                     var nameCurrent = currentUser.getUsername();
                     commentsDatabase.set("username", nameCurrent);
                     commentsDatabase.set("usercomments", commentItem);

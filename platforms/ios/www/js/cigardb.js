@@ -491,13 +491,13 @@ function toTitleCase(str) {
             });
             // validate form
             $('.sendComment').click(function() {
-                var val = $('#reviewarea');
-                if (val.val().length <= 1) {
+                var valReview = $('#reviewarea').val();
+                if (valReview.length <= 1) {
                     enterreviewAlert();
                     //return false;
-                } else if (val.val().length >= 2) {
+                } else if (valReview.length >= 2) {
                     var currentUser = Parse.User.current();
-                    var commentItem = $('.commentSubmit').val();
+                    var commentItem = $('#reviewarea').val();
                     var nameCurrent = currentUser.getUsername();
 
                     cigarCommentsDatabse.set("user", nameCurrent);
