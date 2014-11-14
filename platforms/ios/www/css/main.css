@@ -160,10 +160,11 @@ visibility: hidden;
 }
 
 #userSlider{
-    display:block;
+    display:none;
     position: absolute;
     top:0;
     z-index:99999999999;
+    background: #251b18;
 }
 
 

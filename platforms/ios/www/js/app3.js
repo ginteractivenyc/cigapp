@@ -71,25 +71,34 @@ function keyboardShowHandler(e){
                                 $('#statusUpdate, #cigarfooter').show("slide", {
                                     direction: "right"
                                 }, 200);
+                                $('#userSlider').fadeIn();
                                                     
-                             window.mySwipe = new Swipe(document.getElementById('userSlider'), {
-                              startSlide: 0,  
-                              speed: 400,
-                              continuous: false,
-                              disableScroll: false,
-                              stopPropagation: false,
-                              callback: function(index, elem) {},
-                              transitionEnd: function(index, elem) {
-                                if(window.mySwipe.getPos() === 3){
-                                    setTimeout(function(){
-                                        $('#userSlider').fadeOut(function(){
-                                        $('#userSlider').remove();
+                            window.mySwipe = new Swipe(document.getElementById('userSlider'), {
+                                // startSlide: 0,
+                                // speed: 400,
+                                continuous: false,
+                                // disableScroll: false,
+                                // stopPropagation: false,
+                                callback: function(e, pos) {
+                                    var bullets = $('#position em');
+                                    //var i = bullets.length;
+                                    bullets.className = '';
+                                    var posi = window.mySwipe.getPos();
+                                    bullets[posi].className = 'on';
+                                    bullets[posi - 1].className = '';
+                                    bullets[posi + 1].className = '';
+                                    if (bullets[posi] === 0) {
+                                        bullets[1].className = 'bully';
+                                    }
+                                },
+                                transitionEnd: function(index, elem) {
+                                    if (window.mySwipe.getPos() === 4) {
+                                        $('#userSlider, #bullets').fadeOut(function() {
+                                            $('#userSlider, #bullets').remove();
                                         });
-                                    }, 700);
+                                    }
                                 }
-
-                              }
-                            }); 
+                            });
 
 
                             },
@@ -138,36 +147,6 @@ function keyboardShowHandler(e){
         //user signup
         $('form#signup').fadeIn();
 
-                             window.mySwipe = new Swipe(document.getElementById('userSlider'), {
-
-                             // startSlide: 0,  
-                             // speed: 400,
-                             // continuous: false,
-                             // disableScroll: false,
-                             // stopPropagation: false,
-                              callback: function(e, pos) {
-                                 var bullets = $('#position em');
-                                   
-                              //var i = bullets.length;
-                                bullets.className = '';
-
-                            var posi = window.mySwipe.getPos();
-                               bullets[posi].className = 'on';
-                               bullets[posi-1].className = '';
-                               bullets[posi+1].className = '';
-                               if(bullets[posi] === 0){
-                                bullets[1].className = 'bully';
-                               }
-                                },
-                              transitionEnd: function(index, elem) {
-                                if(window.mySwipe.getPos() === 4){
-                                        $('#userSlider, #bullets').fadeOut(function(){
-                                        $('#userSlider, #bullets').remove();
-                                        });
-                                }
-
-                              }
-                            });
 
 $("#signup").keyup(function(event){
     if(event.keyCode == 13){
@@ -197,25 +176,31 @@ $("#signup").keyup(function(event){
                         direction: "right"
                     }, 200);
                                     
-                        
-                             window.mySwipe = new Swipe(document.getElementById('userSlider'), {
-                              startSlide: 0,  
-                              speed: 400,
-                              continuous: false,
-                              disableScroll: false,
-                              stopPropagation: false,
-                              callback: function(index, elem) {},
-                              transitionEnd: function(index, elem) {
-                                if(window.mySwipe.getPos() === 3){
-                                    setTimeout(function(){
-                                        $('#userSlider').fadeOut(function(){
-                                        $('#userSlider').remove();
-                                        });
-                                    }, 700);
-                                }
-
-                              }
-                            });  
+                      $('#userSlider').fadeIn();  
+        window.mySwipe = new Swipe(document.getElementById('userSlider'), {
+             startSlide: 0,
+            // speed: 400,
+             continuous: false,
+            // disableScroll: false,
+            // stopPropagation: false,
+            callback: function(e, pos) {
+                var bullets = $('#position em');
+                //var i = bullets.length;
+                bullets.className = '';
+                var posi = window.mySwipe.getPos() + 1;
+                bullets[posi].className = 'on';
+                bullets[posi - 1].className = 'bully';
+                bullets[posi + 1].className = '';
+      
+            },
+            transitionEnd: function(index, elem) {
+                if (window.mySwipe.getPos() === 4) {
+                    $('#userSlider, #bullets').fadeOut(function() {
+                        $('#userSlider, #bullets').remove();
+                    });
+                }
+            }
+        }); 
 
                 },
                 error: function(user, error) {
@@ -272,36 +257,7 @@ $("#login").keyup(function(event){
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
-                             $('#userSlider').show();
-    
-                             window.mySwipe = new Swipe(document.getElementById('userSlider'), {
-                              startSlide: 0,  
-                              speed: 400,
-                              continuous: false,
-                              disableScroll: false,
-                              stopPropagation: false,
-                              callback: function(e, pos) {
-                               
-                                var i = bullets.length;
-                                while (i--) {
-                                bullets[i].className = ' ';
-                                }
-                                bullets[pos].className = 'on';
-                         
-                                },
-                              transitionEnd: function(index, elem) {
-                                if(window.mySwipe.getPos() === 3){
-                                    setTimeout(function(){
-                                        $('#userSlider').fadeOut(function(){
-                                        $('#userSlider').remove();
-                                        });
-                                    }, 700);
-                                }
-
-                              }
-                            }),
-                            bullets = document.getElementById('position').getElementsByTagName('em');
-
+                             $('#userSlider').remove();
                             // Do stuff after successful login.
 
                         },
