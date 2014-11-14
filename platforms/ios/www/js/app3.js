@@ -12,8 +12,7 @@ $(document).ready(function() {
     var userFBname = [];
     var passFBword = [];
     var loggedInKey = [];
-    var fbemailArr = [];
-             var baseArray = [];
+    var baseArray = [];
 
     //fastclick 
     $(function() {
@@ -53,6 +52,8 @@ function keyboardShowHandler(e){
                         var email = emaillogged.toString().toLowerCase();
                         var password = passwordfblogged.toLowerCase();
 
+                            
+
                         // alert(username);
                         //parse fb signup
                         user.set("username", username);
@@ -63,7 +64,7 @@ function keyboardShowHandler(e){
                             success: function(user) {
                                 userArrayLogged.length = 0;
                                 userArrayLogged.push(username);
-                                $('form#signup, #homePage, #hometitle, .logohome').hide();
+                                $('form#signup, #homePage, #hometitle, .logohome, #passwordReset').hide();
                                 $('#dbHeader').show();
                                 $('.indicatorsLeft, .indicatorsAdd').hide();
                                 $('#statusUpdate, .statuscue').show();
@@ -103,12 +104,29 @@ function keyboardShowHandler(e){
 
                             },
                             error: function(user, error) {
-                                fbUserAlert();
-                                setTimeout(function(){
-                                $('form#signup, form#login, form#signup, #signupbutton, #logtext, #forgottext, #fblogin, #passwordReset').hide();
-                                $('form#fbLoginEmail').fadeIn();
+                               // alert(fbuserarray);
+                                //fbUserAlert();
+                             var stringThis = response.name.toLowerCase();
+                                //alert(stringThis);
+                    Parse.User.logIn(stringThis, "fbuser", {
+                        success: function(user) {
+                            $('form#signup, #login, #homePage, #hometitle, .logohome, #passwordReset').hide();
+                            $('.indicatorsLeft, .indicatorsAdd').hide();
+                            $('#statusUpdate, .statuscue').show('');
+                            $('#dbHeader').show();
+                            $('#cigarfooter').show();
+                            $('#brandTitle').html('CLIQUE FEED');
+                             $('#userSlider').remove();
+                            // Do stuff after successful login.
 
-                                }, 300);
+                        },
+                        error: function(user, error) {
+                            wronguserAlert();
+                            // The login failed. Check error to see why.
+                        }
+                    });
+                
+
                             }
                         });
                     });
@@ -133,7 +151,7 @@ function keyboardShowHandler(e){
             $('#userSlider').remove();
             });
         //$('body').append(nameCurrent + ' is logged in');
-        $('#homePage, #form#signup, #hometitle, .logohome').hide();
+        $('#homePage, #form#signup, #hometitle, .logohome, #passwordReset').hide();
         $('#dbHeader').show();
         $('#brandTitle').html('CLIQUE FEED');
         $('#statusUpdate, .statuscue').show();
@@ -167,7 +185,7 @@ $("#signup").keyup(function(event){
                 success: function(user) {
                     userArrayLogged.length = 0;
                     userArrayLogged.push(username);
-                    $('form#signup, #homePage, #hometitle, .logohome').hide();
+                    $('form#signup, #homePage, #hometitle, .logohome, #passwordReset').hide();
                     $('#dbHeader').show();
                     $('.indicatorsLeft, .indicatorsAdd').hide();
                     $('#statusUpdate, .statuscue').show();
@@ -216,7 +234,7 @@ $("#signup").keyup(function(event){
 
     $('#logmein').click(function() {
 
-        $('form#signup, #signupbutton, #logtext, #forgottext, #fblogin').hide();
+        $('form#signup, #signupbutton, #logtext, #forgottext, #fblogin, #passwordReset').hide();
         $('form#login').hide().fadeIn(350);
 
     });
@@ -251,7 +269,7 @@ $("#login").keyup(function(event){
                         success: function(user) {
                             resultuser.length = 0;
                             userArrayLogged.push(resultuser);
-                            $('form#signup, #homePage, #hometitle, .logohome').hide();
+                            $('form#signup, #login, #homePage, #hometitle, .logohome, #passwordReset').hide();
                             $('.indicatorsLeft, .indicatorsAdd').hide();
                             $('#statusUpdate, .statuscue').show('');
                             $('#dbHeader').show();
@@ -301,7 +319,12 @@ $('#passwordresetbtn').click(function(){
 
 
 //fb already signed up
-
+//fb already signed up
+$("#fbLoginEmail").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#loginfbbutton").click();
+    }
+});
 
         $('#loginfbbutton').click(function(){
             var emailReset = $('#fb-loginemail').val().toLowerCase();
@@ -321,11 +344,7 @@ $('#passwordresetbtn').click(function(){
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
-                             $('body').append('<img src="img/usercue.jpg?v=2" id="usercueintro">');
-                            $('body').append('<div id="closeUser">Proceed</div>');
-                                $('#closeUser').click(function(){
-                                    closeCue();
-                                });
+                             
                             // Do stuff after successful login.
 
                         },
@@ -335,9 +354,9 @@ $('#passwordresetbtn').click(function(){
                         }
                     });
 
-        }
-    });
-});
+                    }
+                });
+            });
 
 
    /* $('#loginbuttonFB').click(function() {
@@ -2186,7 +2205,7 @@ for(i=0; i < elelist.length; i++){
 
         function fbUserAlert() {
         navigator.notification.alert(
-            'Enter your Facebook Email. You will receive instructions on resetting your password.',  // message
+            'Enter your Facebook Email.',  // message
             alertDismissed3,         // callback
             'Cigar Clique',            // title
             'Ok'                  // buttonName
