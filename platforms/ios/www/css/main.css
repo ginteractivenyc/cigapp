@@ -1593,11 +1593,12 @@ text-align: center;
 
 .reviewicon{
 display: block;
-width: 20px;
+width: 30px;
 /* float: left; */
 /* margin-left: 5px; */
 position: absolute;
 right: 10px;
+margin-top:-5px
 }
 
 .cameraAlert{

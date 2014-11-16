@@ -913,7 +913,12 @@ alert("Posts are loading");
          $('.closestatus').removeClass('tapActive');
         setTimeout(function() {
         $('.commentBox').removeClass('slideLeft');
-            },200);     
+            },100);
+
+        setTimeout(function(){
+            $('.commentBox').remove();
+        },300);
+
        }, 150);
     });
             //adjust click here color
@@ -928,6 +933,8 @@ alert("Posts are loading");
             $('.sendComment').click(function() {
                 var valCom = $('#commentarea').val();
                 if (valCom.length <= 1) {
+                //$('#commentarea, #reviewarea').remove();
+
                     entercommentAlert();
                     //return false;
                 } else if (valCom.length >= 2) {

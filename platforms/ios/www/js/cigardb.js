@@ -382,19 +382,28 @@ $("#originSubmit").change(function () {
 		 $('.closestatus').removeClass('tapActive');
 		setTimeout(function() {
 		$('#cigarslistForm').removeClass('slideLeft');
-			},200);		
+			},100);	
+
+		setTimeout(function(){
+			$('.commentBox').remove();
+		},300);
+
        }, 150);
 	});
 
 	$('.statusclose').click(function() {
 		$(this).addClass('tapActive');
-
 		  setTimeout(function() {
            $('.statusclose, .statuscue, #uploadBtn').removeClass('tapActive');
            	setTimeout(function() {
            	$('#statusInnerWrapper').removeClass('slideLeft');
 			$('.cameraAlert').removeClass('slideLeft');
-			},200);
+			},100);
+			
+		setTimeout(function(){
+			$('.commentBox').remove();
+		},300);
+
           }, 150);
 
 	});
@@ -473,12 +482,19 @@ function toTitleCase(str) {
             }, 300);
    
 	$('.closestatus').click(function() {
+
 		$(this).addClass('tapActive');
 	setTimeout(function() {
 		 $('.closestatus').removeClass('tapActive');
 		setTimeout(function() {
 		$('.commentBox').removeClass('slideLeft');
-			},200);		
+			},100);	
+
+		setTimeout(function(){
+			$('.commentBox').remove();
+		},300);
+
+
        }, 150);
 	});
             //adjust click here color
@@ -512,6 +528,7 @@ function toTitleCase(str) {
                     $('.commentBox').removeClass('slideLeft');
                     setTimeout(function() {
                         $('.commentBox').remove();
+
 
 			// retrieve cigar reviews after submission
         var cigarComments = Parse.Object.extend("cigarComments");
