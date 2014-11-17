@@ -209,13 +209,20 @@ z-index: 99999999999999;
     background:rgba(0,0,0,0.4);
 }
 
-#cigarslistNameWrapper, #cigarslistWrapper{
+.darktop{
+    background: #170D07;
+}
+
+#cigarslistNameWrapper, #cigarslistWrapper, #toplistWrapper{
 
 	-moz-transform: translateX(100%) translateY(0px);
 -webkit-transform: translateX(100%) translateY(0px);
 -o-transform: translateX(100%) translateY(0px);
 -ms-transform: translateX(100%) translateY(0px);
 transform: translateX(100%) translateY(0px); 
+}
+#toplistWrapper{
+    top:0;
 }
 
 #cigarslistForm, #mapWrapperOuter, #statusInnerWrapper, .commentBox{
@@ -662,6 +669,7 @@ left: 12px;
     display:block;
     float:left;
     color:#d19538;
+    margin-right: 5px;
 }
 
 .likeposted {
@@ -684,7 +692,7 @@ left: 12px;
     display:block;
     float:left;
     letter-spacing:normal;
-    padding-left:5px;
+   /* padding-left:5px;*/
     color:#c4c4c4;
 }
 
@@ -1147,7 +1155,7 @@ textarea#status {
    padding-bottom:70px;
 }
 
-#cigarslistWrapper li {
+#cigarslistWrapper li, #toplistWrapper li {
     border-bottom:none;
     list-style:none;
     padding:5px;

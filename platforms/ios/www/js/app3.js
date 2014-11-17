@@ -1350,6 +1350,9 @@ $('#myhumidoricon').on('click', function() {
 });
 
 
+
+
+
 //autocomplete for adding cigar to taks list
 $(function() {
     var availableTags = [

@@ -4,6 +4,12 @@ $(document).ready(function() {
 		FastClick.attach(document.body);
 	});
 
+
+
+
+
+
+
 	//cigar database
 	var cigarbrandArray = [];
 	var resultsarray = [];
@@ -440,7 +446,203 @@ $("#originSubmit").change(function () {
 
 
 
+$('#topRated').on('click', function(){
+        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
+        $('#topratedPage').show();
+        getTopRated();
+
 });
+
+
+
+    function getTopRated() {
+        //get user comments
+        var topCount = [];
+        var topRatedDatabase = Parse.Object.extend("RatingsObject");
+        var queryRatings = new Parse.Query(topRatedDatabase);
+        queryRatings.descending("cigarRating");
+        queryRatings.limit(25);
+        queryRatings.find({
+            success: function(results) {
+                for (var i = 0; i < results.length; i++) {
+
+                    var object = results[i];
+                    var  topName = object.get("cigarName");
+                    var topBrand = object.get("cigarBrand");
+
+if(topName === topName){
+    //console.log(object.get("cigarName"));
+    var pushThis = '<span class="topName" data-topname="' + topName + '">' + topName +'</span>' +  ' - ' + '<span class="topBrand" data-topbrand="' +  topBrand   +    '">' + topBrand + '</span>';
+    topCount.push(pushThis);
+}
+
+            }
+            var hash = [];
+
+            for (var n = topCount.length; n--;) {
+                if (typeof hash[topCount[n]] === 'undefined') hash[topCount[n]] = [];
+                hash[topCount[n]].push(n);
+            }
+
+            var duplicates = [];
+            for (var key in hash) {
+                if (hash.hasOwnProperty(key) && hash[key].length > 1) {
+                    duplicates.push(key);
+                }
+            }
+
+            //console.log(duplicates);
+            for (var i = 0; i < duplicates.length; i++) {
+                $('#topCigs').append('<li class="cigartitle">' + duplicates[i] + '</li>');
+
+            }
+
+                $('#topCigs li.cigartitle').click(function(){
+                		
+					$('#toplistWrapper').show();
+					$('#toplistWrapper').empty();
+					setTimeout(function() {
+						$('#toplistWrapper').addClass('slideLeft');
+					}, 200);
+
+				var matchThisTitle = $(this).find('.topName').attr('data-topname');
+					var matchThisBrand = $(this).find('.topBrand').attr('data-topbrand');
+						var CigarList = Parse.Object.extend("CigarList");
+						var querycigarList = new Parse.Query(CigarList);
+					querycigarList.equalTo("cigarBrand", matchThisBrand);
+					querycigarList.find({
+					success: function(results) {
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						var cigarName = object.get("cigar");
+						var cigarBrand = object.get("cigarBrand");
+						var cigarWrapper = object.get("wrapper");
+						var cigarStrength = object.get("strength");
+						var cigarOrigin = object.get("origin");
+
+						if (cigarName == matchThisTitle && cigarBrand == matchThisBrand) {
+
+							$('#toplistWrapper').append('<ul>' + '<li class="cigartitle" data-name-cigar="' + cigarName + '"' + 'data-name-brand="' + cigarBrand + '">' + cigarName + '</li>' + '<li>' + '<span class="cigarsubs">' + 'wrapper: ' + '</span>' + cigarWrapper + '</li>' + '<li>' + '<span class="cigarsubs">' + 'strength: ' + '</span>' + cigarStrength + '</li>' + '<li class="cigarsubs">' + '<span class="cigarsubs">' + 'origin: ' + '</span>' + cigarOrigin + '</li>' + '<li class="ratingwrapper cigarlast">' + '<span class="cigarrate">' + 'Rating:' + '</span>' + '<div class="rating-container" data-id="' + cigarName + '">' +
+								' <img class="star" data-rating="1" src="img/cigar.png?v=4">' + ' <img class="star" data-rating="2" src="img/cigar.png?v=4">' + ' <img class="star" data-rating="3" src="img/cigar.png?v=4">' + ' <img class="star" data-rating="4" src="img/cigar.png?v=4">' + ' <img class="star" data-rating="5" src="img/cigar.png?v=4">' + '</div>' + '</li>' + '</ul>');
+							 $('#toplistWrapper').append('<ul id="commentBox">' +'<li>' + '<img src="img/commentBtn2.png" class="reviewicon">' + '<span class="cigarsubs">' + 'Reviews: ' + '</span>'  + '<ul class="commentsList">' + '</ul>' + '</li>'  + '</ul>')
+
+						}
+					}
+				}
+			});
+
+
+//get ratings
+					var arraycigs = [];
+					var nameofBrand = $(this).find('.topBrand').attr('data-topbrand');
+					var nameofCigar = $(this).find('.topName').attr('data-topname');
+					//alert(nameofCigar);
+					var RatingsObject = Parse.Object.extend("RatingsObject");
+					var queryRatings = new Parse.Query(RatingsObject);
+					queryRatings.equalTo("cigarBrand", nameofBrand);
+					queryRatings.equalTo("cigarName", nameofCigar);
+
+					queryRatings.find({
+						success: function(ratings) {
+							for (var i = 0; i < ratings.length; i++) {
+								// Do something with the returned Parse.Object values    
+								var object = ratings[i];
+								//alert(object.id + ' - ' + object.get('cigarRating'));
+								arraycigs.push(object.get('cigarRating'));
+
+							}
+
+
+							var lengthVal = arraycigs.length;
+							var addedTotal = eval(arraycigs.join('+'));
+							var summedTotal = addedTotal / lengthVal;
+							if (summedTotal === 5) {
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star').addClass('active');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								return false;
+							}
+							if (summedTotal === 4) {
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(5)').prevAll('.star').addClass('active');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								return false;
+							}
+							if (summedTotal === 3) {
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(4)').prevAll('.star').addClass('active');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								return false;
+							}
+							if (summedTotal === 2) {
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(3)').prevAll('.star').addClass('active');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								return false;
+							}
+							if (summedTotal === 1) {
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(1)').addClass('active');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								return false;
+
+							}
+							if (summedTotal > 4 && summedTotal < 5) {
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(5)').prevAll('.star').addClass('active');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(5)').addClass('halfActive');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+
+								return false;
+
+							}
+							
+							if (summedTotal > 3 && summedTotal < 4) {
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(4)').prevAll('.star').addClass('active');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(4)').addClass('halfActive');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+
+								return false;
+							}
+							if (summedTotal > 2 && summedTotal < 3) {
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(3)').prevAll('.star').addClass('active');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(3)').addClass('halfActive');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+
+								return false;
+							}
+							if (summedTotal > 1 && summedTotal < 2) {
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(2)').prevAll('.star').addClass('active');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(2)').addClass('halfActive');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+
+								return false;
+							}
+						},
+						error: function(error) {
+							alert("Error: " + error.code + " " + error.message);
+						}
+/*end of topratings li click*/
+					});
+
+
+                });
+
+            },
+            error: function(object, error) {
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and description.
+            }
+        });
+/*end of topratings function*/
+    }
+
+
+
+
+
+});
+
+
+
 
 //end of document ready
 //capitalize  brand name on input
