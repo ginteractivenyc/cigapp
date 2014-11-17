@@ -96,6 +96,14 @@ ul,li {
 	top: 6px;
 }
 
+.indicatortopRated{
+    width:32px;
+    position:absolute;
+    right: 40px;
+    top: 6px;
+    display:none;
+}
+
 
 
 
@@ -590,7 +598,7 @@ left: 12px;
 .likesbox,.commentsbox {
     float:left;
     display:block;
-    width:80%;
+    width:85%;
     margin-bottom:8px;
     margin-left: 3px;
 }
@@ -657,19 +665,21 @@ left: 12px;
 }
 
 .commentposted {
-    display:block;
-    float:left;
-    clear:both;
-    margin-top:5px;
-    margin-left:5px;
+display: block;
+float: left;
+clear: both;
+margin-top: 5px;
+margin-left: 5px;
+width: 100%;
 }
 
 .commentUser {
-    font-size:12px;
-    display:block;
-    float:left;
-    color:#d19538;
-    margin-right: 5px;
+font-size: 11px;
+/* line-height: 17px; */
+display: inline;
+/* float: left; */
+color: #d19538;
+margin-right: 5px;
 }
 
 .likeposted {
@@ -686,14 +696,15 @@ left: 12px;
 }
 
 .commentPost {
-    font-size:12px;
-    font-family:arial;
-    text-transform:none;
-    display:block;
-    float:left;
-    letter-spacing:normal;
-   /* padding-left:5px;*/
-    color:#c4c4c4;
+font-size: 12px;
+font-family: arial;
+/* line-height: 25px; */
+text-transform: none;
+display: inline;
+/* float: left; */
+letter-spacing: normal;
+/* padding-left: 5px; */
+color: #c4c4c4;
 }
 
 .sendComment{
@@ -1518,14 +1529,15 @@ left: 27%;
 #mapWrapperOuter{
 	background: #000;
 }
-.closestatus{
+.closestatus, .closeTop, .closeToplevel2{
 	position: absolute;
 	top:10px;
 	left:0;
 	width:32px;
 }
-
-
+.closeTop, .closeToplevel2{
+    display:none;
+}
 #resultCanvas1 {
 	/*visibility: hidden;*/
 	position: absolute;

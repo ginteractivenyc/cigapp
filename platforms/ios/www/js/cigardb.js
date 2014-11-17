@@ -240,13 +240,14 @@ reviewClick();
 						var nameofCigar = $(this).parent().parent().parent().find('.cigartitle').attr('data-name-cigar');
 						var rateValue = $(this).attr('data-rating');
 						var postACL = new Parse.ACL(Parse.User.current());
+
 						postACL.setPublicReadAccess(true);
 						postACL.setPublicWriteAccess(false);
 						ratingsCount.setACL(postACL);
 						ratingsCount.save({
 							cigarBrand: nameofBrand,
 							cigarName: nameofCigar,
-							cigarRating: rateValue,
+							cigarRating: rateValue
 						});
 					}); //end of rating
 
@@ -446,16 +447,11 @@ $("#originSubmit").change(function () {
 
 
 
-$('#topRated').on('click', function(){
-        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
-        $('#topratedPage').show();
-        getTopRated();
-
-});
 
 
 
     function getTopRated() {
+    	 $('#topCigs').empty();
         //get user comments
         var topCount = [];
         var topRatedDatabase = Parse.Object.extend("RatingsObject");
@@ -498,7 +494,9 @@ if(topName === topName){
             }
 
                 $('#topCigs li.cigartitle').click(function(){
-                		
+                		$('.closeToplevel2').show();
+                		$('.closeTop').hide();
+
 					$('#toplistWrapper').show();
 					$('#toplistWrapper').empty();
 					setTimeout(function() {
@@ -528,11 +526,37 @@ if(topName === topName){
 
 						}
 					}
+
 				}
 			});
+			// retrieve cigar comments
+        var cigarComments = Parse.Object.extend("cigarComments");
+        var querycigarComments = new Parse.Query(cigarComments);
+					var nameofCigar = $(this).find('.topName').attr('data-topname');
+					var nameofBrand = $(this).find('.topBrand').attr('data-topbrand');
 
+                    querycigarComments.find({
+                        success: function(comments) {
+                    for (var i = 0; i < comments.length; i++) {
+                        var object = comments[i];
+                        var cigarName = object.get("cigarname");
+                        var cigarBrand = object.get("cigarbrand");
+    					var commentUser= object.get("user");
+						var userComment= object.get("comment");
+                        if (cigarName == nameofCigar && cigarBrand == nameofBrand) {
+
+                           $('.commentsList').append('<li class="addedComment">' + '<span class="commentUser">' + commentUser  + '</span>'  + '<span class="commentPost">' + userComment + '</span>' + '</li>');
+
+                        }
+                    }
+                },
+                error: function(comments, error){
+                            alert('no comments');
+                }
+            });
 
 //get ratings
+
 					var arraycigs = [];
 					var nameofBrand = $(this).find('.topBrand').attr('data-topbrand');
 					var nameofCigar = $(this).find('.topName').attr('data-topname');
@@ -551,6 +575,9 @@ if(topName === topName){
 								arraycigs.push(object.get('cigarRating'));
 
 							}
+
+
+					reviewClick();
 
 
 							var lengthVal = arraycigs.length;
@@ -616,6 +643,9 @@ if(topName === topName){
 
 								return false;
 							}
+
+
+
 						},
 						error: function(error) {
 							alert("Error: " + error.code + " " + error.message);
@@ -636,7 +666,31 @@ if(topName === topName){
     }
 
 
+$('.indicatortopRated').on('click', function(){
+	$('#brandTitle').html('Top Rated Cigars');
+        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
+        $('#topratedPage, .closeTop').show();
+        $('.indicatortopRated').hide();
 
+        getTopRated();
+
+});
+
+
+	      	$('.closeTop').click(function(){
+
+				$('#topratedPage, .closeTop').hide();
+		        $('#cigardatabase, .indicatorsAdd, .indicatortopRated').show();
+				$('#brandTitle').html('Brands');
+      		 });
+	      	$('.closeToplevel2').click(function(){
+
+				$('#toplistWrapper, #cigardatabase, .indicatorsAdd').hide();
+				$('#topratedPage, .closeTop').show();
+				$(this).hide();
+		
+
+      		 });
 
 
 });
@@ -663,9 +717,11 @@ function toTitleCase(str) {
 
 
   function reviewClick() {
+
         // send comment
         $('.reviewicon').unbind();
         $('.reviewicon').bind('click', function() {
+
         var matchThisTitle = $(this).parent().parent().parent().find('.cigartitle').attr('data-name-cigar');
         var matchThisBrand = $(this).parent().parent().parent().find('.cigartitle').attr('data-name-brand');
        // alert(matchThisBrand + matchThisTitle);

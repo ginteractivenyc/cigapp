@@ -416,7 +416,7 @@ $("#fbLoginEmail").keyup(function(event){
         $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
         $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
         $('#locateicon').attr('src', 'img/locateicon.png').show();
-        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
+        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated').hide();
         $('#statusUpdate, .statuscue').show();
         arraycigPosts.length = 0;
         console.log("this is arraycigs" + arraycigPosts.length);
@@ -1298,7 +1298,7 @@ $('#locateicon').on('click', function() {
     $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
 
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated').hide();
     $('#locatePage').show();
     $('#brandTitle').html('Locate a Cigar Bar or Shop');
 
@@ -1315,6 +1315,7 @@ $('#cigarlisticon').click(function() {
     $('#locateicon').attr('src', 'img/locateicon.png').show();
     $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
+    $('.indicatortopRated').show();
 /*
     //$('#cigarslistForm').removeClass('fadeout').css('visibility','visible');
     if ($('#cigardatabase').hasClass('level2') || $('#cigardatabase').hasClass('level3')) {
@@ -1342,7 +1343,7 @@ $('#myhumidoricon').on('click', function() {
     $('#locateicon').attr('src', 'img/locateicon.png').show();
     $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated').hide();
     $('#listPage').show();
     $('#brandTitle').html('My Humidor');
 
