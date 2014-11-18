@@ -225,7 +225,7 @@ z-index: 99999999999999;
     background: #170D07;
 }
 
-#cigarslistNameWrapper, #cigarslistWrapper, #toplistWrapper{
+#cigarslistNameWrapper, #cigarslistWrapper, #toplistWrapper, #userNotWrapper, #userPostWrapper{
 
 	-moz-transform: translateX(100%) translateY(0px);
 -webkit-transform: translateX(100%) translateY(0px);
@@ -1648,4 +1648,10 @@ transform: translateX(0%) translateY(100%);
 .cameraAlert ul li{
     color:#000;
     text-align: center;
+}
+
+
+.topBrand{
+    color:#c4c4c4;
+    font-size:12px;
 }

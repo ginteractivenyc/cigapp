@@ -538,7 +538,39 @@ if(topName === topName){
 						}
 					}
 
+					$('.rating-container .star').click(function() {
+						
+						$(this).addClass('staractive');
+						$('.staractive').attr('src', 'img/cigarFilled.png?v=4');
+						$('.rating-container .star').not(this).removeClass('active');
+
+
+						$('.rating-container .star').not(this).attr('src', 'img/cigar.png?v=4');
+						$(this).prevAll('.star').addBack().addClass('active');
+
+						//alert();
+						setTimeout(function() {
+							$('.active').attr('src', 'img/cigarFilled.png?v=4');
+
+						}, 300);
+						var RatingsObject = Parse.Object.extend("RatingsObject");
+						var ratingsCount = new RatingsObject();
+						var nameofBrand = $(this).parent().parent().parent().find('.cigartitle').attr('data-name-brand');
+						var nameofCigar = $(this).parent().parent().parent().find('.cigartitle').attr('data-name-cigar');
+						var rateValue = $(this).attr('data-rating');
+						var postACL = new Parse.ACL(Parse.User.current());
+
+						postACL.setPublicReadAccess(true);
+						postACL.setPublicWriteAccess(false);
+						ratingsCount.setACL(postACL);
+						ratingsCount.save({
+							cigarBrand: nameofBrand,
+							cigarName: nameofCigar,
+							cigarRating: rateValue
+						});
+					}); //end of rating
 				}
+
 			});
 			// retrieve cigar comments
         var cigarComments = Parse.Object.extend("cigarComments");

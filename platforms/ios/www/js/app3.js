@@ -13,7 +13,11 @@ $(document).ready(function() {
     var passFBword = [];
     var loggedInKey = [];
     var baseArray = [];
+    var postidArray = [];
 
+
+                       
+   userArrayLogged.length= 0;
     //fastclick 
     $(function() {
         FastClick.attach(document.body);
@@ -62,8 +66,7 @@ function keyboardShowHandler(e){
                         user.set("fbuser", fbuser);
                         user.signUp(null, {
                             success: function(user) {
-                                userArrayLogged.length = 0;
-                                userArrayLogged.push(username);
+                                    userArrayLogged.push(username);
                                 $('form#signup, #homePage, #hometitle, .logohome, #passwordReset').hide();
                                 $('#dbHeader').show();
                                 $('.indicatorsLeft, .indicatorsAdd').hide();
@@ -72,6 +75,7 @@ function keyboardShowHandler(e){
                                 $('#statusUpdate, #cigarfooter').show("slide", {
                                     direction: "right"
                                 }, 200);
+                                 userNotification();
                                 $('#userSlider').fadeIn();
                                                     
                             window.mySwipe = new Swipe(document.getElementById('userSlider'), {
@@ -110,13 +114,16 @@ function keyboardShowHandler(e){
                                 //alert(stringThis);
                     Parse.User.logIn(stringThis, "fbuser", {
                         success: function(user) {
+                            userArrayLogged.push(stringThis);
                             $('form#signup, #login, #homePage, #hometitle, .logohome, #passwordReset').hide();
                             $('.indicatorsLeft, .indicatorsAdd').hide();
                             $('#statusUpdate, .statuscue').show('');
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
+                             userNotification();
                              $('#userSlider').remove();
+
                             // Do stuff after successful login.
 
                         },
@@ -144,9 +151,8 @@ function keyboardShowHandler(e){
 
     if (currentUser) {
         var nameCurrent = currentUser.getUsername();
-        userArrayLogged.length = 0;
-        userArrayLogged.push(nameCurrent);
 
+        userArrayLogged.push(nameCurrent);
          $('#userSlider').fadeOut(function(){
             $('#userSlider').remove();
             });
@@ -157,8 +163,9 @@ function keyboardShowHandler(e){
         $('#statusUpdate, .statuscue').show();
         $('.indicatorsLeft, .indicatorsAdd').hide();
         $('#cigarfooter').show();
+         userNotification();
         $('#fileselect').attr('data-name', nameCurrent);
-
+        
     } else
 
     {
@@ -183,13 +190,13 @@ $("#signup").keyup(function(event){
          
             user.signUp(null,{
                 success: function(user) {
-                    userArrayLogged.length = 0;
                     userArrayLogged.push(username);
                     $('form#signup, #homePage, #hometitle, .logohome, #passwordReset').hide();
                     $('#dbHeader').show();
                     $('.indicatorsLeft, .indicatorsAdd').hide();
                     $('#statusUpdate, .statuscue').show();
                     $('#brandTitle').html('CLIQUE FEED');
+                     userNotification();
                     $('#statusUpdate, #cigarfooter').show("slide", {
                         direction: "right"
                     }, 200);
@@ -255,6 +262,7 @@ $("#login").keyup(function(event){
 
 
        $('#loginbutton').click(function() {
+
         var emaillogged = $("#login-email").val().toLowerCase();
         var passwordlogged = $("#login-password").val();
         if(emaillogged.length === 0){
@@ -264,18 +272,22 @@ $("#login").keyup(function(event){
         queryUser.equalTo("email", emaillogged);
         queryUser.first({
             success: function(resultEmail) {
-                var resultuser = resultEmail.get("username")
+                var resultuser = resultEmail.get("username");
+                  userArrayLogged.push(resultuser);
+
                   Parse.User.logIn(resultuser, passwordlogged, {
                         success: function(user) {
-                            resultuser.length = 0;
-                            userArrayLogged.push(resultuser);
+                           // resultuser.length = 0;
+                           // userArrayLogged.push(resultuser);
                             $('form#signup, #login, #homePage, #hometitle, .logohome, #passwordReset').hide();
                             $('.indicatorsLeft, .indicatorsAdd').hide();
-                            $('#statusUpdate, .statuscue').show('');
+                            $('#statusUpdate, .statuscue').show();
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
                              $('#userSlider').remove();
+                         userNotification();
+                           
                             // Do stuff after successful login.
 
                         },
@@ -344,7 +356,7 @@ $("#fbLoginEmail").keyup(function(event){
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
-                             
+                             userNotification();
                             // Do stuff after successful login.
 
                         },
@@ -359,49 +371,6 @@ $("#fbLoginEmail").keyup(function(event){
             });
 
 
-   /* $('#loginbuttonFB').click(function() {
-               $('#login-username, #login-password').fadeOut(350, function() {
-               $('#fb-email').fadeIn(350);
-               $('.fbactive').click(function(){
-                var emaillogged = $("#fb-email").val().toLowerCase();
-                var queryUser = new Parse.Query(Parse.User);
-                queryUser.equalTo("email", emaillogged);
-                queryUser.first({
-                 success: function(resultEmail) {
-                    if (resultEmail.get("fbuser") === "yes") {
-                        var thisUser = resultEmail.get("username");
-                         Parse.User.logIn(thisUser,"fbuser", {
-                        success: function(userLOGGED) {
-                            $('form#login, #homePage').hide();
-                            $('.indicatorsLeft, .indicatorsAdd').hide();
-                            $('#statusUpdate, .statuscue').show('');
-                            $('#dbHeader').show();
-                            $('#cigarfooter').show();
-                            $('#brandTitle').html('CLIQUE FEED');
-
-                            // Do stuff after successful login.
-
-                        },
-                        error: function(userLOGGED, error) {
-                            alert('The username entered does not exist');
-                            // The login failed. Check error to see why.
-                        }
-                    });
-
-                           
-                        }
-    
-                    },
-                        error: function(resultEmail, error) {
-                            alert('vnjsdvnd');
-                            // The login failed. Check error to see why.
-                        }
-                    });
-                });
-                });
-   });
-
-*/
 
 
 
@@ -570,75 +539,6 @@ $('.logohome').hide();
 
 
 
-
-        
-    //upload post
-/*
-    $('.camera').click(function() {
-$('#resultImage').remove();
-
-navigator.camera.getPicture(onSuccess, onFail, { quality: 50,targetWidth: 300,
-    destinationType: Camera.DestinationType.DATA_URL,
-   sourceType : Camera.PictureSourceType.PHOTOLIBRARY
-
-});
-
-function onSuccess(imageData) {
-$('#statusInnerWrapper').append('<img id="resultImage" src="">');
-    var image = document.getElementById('resultImage');
-    image.src = "data:image/jpeg;base64," + imageData;
-    var filesrc = image.src;
-//pushBase.push(imageData);
-//console.log(pushBase);
-
-//var pushBaseString = JSON.stringify(pushBase);
-     //var dataURL = resCanvas2.toDataURL('image/jpeg', 1.0);
-        //var blob = dataURItoBlob(imageData);
-        //$("#fileselect").attr('src', pushBase)
- setTimeout(function() {
-                $('#uploadbutton').click(function(e) {
-                var name = "image1.jpg";
-                       var parseFile = new Parse.File(name, {
-        base64: filesrc
-     });
-            //var fileUploadControl = $("#fileselect");
-    // var file = fileUploadControl.attr('src');
-                     // alert(pushBase);
-                
-                    var val = document.getElementById('statusupdateform').value;
-                    var statusupdate = $('#statusupdateform').val();
-                    var currentUser = Parse.User.current();
-                    parseFile.save().then(function() {
-                        var nameCurrent = currentUser.getUsername();
-                        var cigarWall = new Parse.Object("cigarwall");
-                        cigarWall.set("appuser", nameCurrent);
-                        cigarWall.set("statusupdate", statusupdate);
-                        cigarWall.set("imagefile", parseFile);
-                        cigarWall.save({
-                            success: function() {
-                                
-                               var postupdate = cigarWall.get('statusupdate');
-                                //$('#fileselect').attr('data-change', 'false');
-                                $('#statusInnerWrapper').removeClass('slideLeft');
-                                /*setTimeout(function() {
-                                    location.reload();
-                                }, 500);
-            
-                            },
-                            error: function() {
-                                alert("upload failed. please try again!");
-                            }
-                        });
-                    });
-                }); 
-        }, 700);
-
-}
- function onFail(message) {
-    alert('Failed because: ' + message);
-} 
-    });
-*/
 
 
     function dataURItoBlob(dataURI) {
@@ -895,7 +795,7 @@ alert("Posts are loading");
             var CommentsDatabase = Parse.Object.extend("CommentsDatabase");
             var commentsDatabase = new CommentsDatabase();
             var postId = $(this).parent().closest('.cigarpost').attr('id');
-
+             var replyUser = $(this).parent().closest('.cigarpost').find('.postuser').text();
             $('#appContainer').append('<div class="commentBox dbWrap mainsection"><img src="img/closestatus.png" class="closestatus"></div>');
 
             $(this).parent().parent().find('.commentsbox').clone().appendTo('.commentBox');
@@ -944,6 +844,7 @@ alert("Posts are loading");
                     commentsDatabase.set("username", nameCurrent);
                     commentsDatabase.set("usercomments", commentItem);
                     commentsDatabase.set("postid", postId);
+                    commentsDatabase.set("replyUser", replyUser);
                     commentsDatabase.save();
                     $('#' + postId).find('.commenticon, .commentsbox').show();
 
@@ -1040,6 +941,114 @@ alert("Posts are loading");
 
     }
 
+
+
+function userNotification(){
+        var CommentsDatabase = Parse.Object.extend("CommentsDatabase");
+        var querycomments = new Parse.Query(CommentsDatabase);
+        var userString = userArrayLogged.toString();
+        querycomments.descending("createdAt");
+        querycomments.find({
+            success: function(results) {
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    var commentuser = object.get("username");
+                    var postidget = object.get("postid");
+                    var replyUser = object.get("replyUser");
+
+                    if(replyUser === userString){
+
+                         $('#statusUpdate, .statuscue').hide();
+
+                         $('#userNotWrapper').addClass('slideLeft').show();
+                         $('#userNotWrapper ul').append('<li data-post="' + postidget + '">' + commentuser + '<span class="topBrand"> commented on your post</span>' + '</li>');
+                         var notiLength = $('#userNotWrapper ul li').length;
+                         $('#brandTitle').html('<span style="font-size:16px">' + notiLength + '</span>' + " Notifications");
+
+                    }                    
+
+                }
+
+                 $('#userNotWrapper ul li').click(function(){
+                    postidArray.length = 0;
+                    var thisPost = $(this).attr('data-post');
+                   postidArray.push(thisPost);
+                       getUserPost();
+                    querycomments.equalTo("postid", thisPost);
+                            querycomments.find({
+                                success: function(results) {
+                            for (var i = 0; i < results.length; i++) {
+
+                                var object = results[i];
+                                    //object.unset("postid");
+                                    object.unset("replyUser");
+                                    object.save();
+                                }
+                                },
+                                error: function(error){
+
+                                }
+                            });
+
+
+
+
+                    });
+                // The object was retrieved successfully.
+            },
+            error: function(object, error) {
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and description.
+            }
+        });
+
+}
+
+
+
+
+
+
+ function getUserPost() {
+
+       // $('#userPostWrapper').empty();
+        $('#userPostWrapper').addClass('slideLeft').show();
+        //get posts
+        var register = Parse.Object.extend("cigarwall");
+        var query = new Parse.Query(register);
+        query.find({
+            success: function(results) {
+                // alert("Successfully retrieved " + results.length + ".");
+                imageURLs = [];
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    var objectstring = object.id;
+                    var imageFile = object.get('imagefile');
+                    var postNameUser = object.get('appuser');
+                    var imageURL = imageFile.url();
+                    var postupdate = object.get('statusupdate');
+                    if(objectstring === postidArray.toString()){
+                        
+                    $('#userPostWrapper').append('<div class="cigarpost" id="' + postidArray + '">' + '<span class="postuser">' + postNameUser + '</span>' + '<div class="imgpost">' + '<img class="postcigimg" data-name="' + postNameUser + '"' + 'src="' + imageURL + '"' + 'width="294"' + '">' + '</div>' + '<span class="statusupdate">' + postupdate + '</span>' + '<img src="img/likeBtn2.png" class="likeicon" style="display:none;">' + '<div class="likesbox" style="display:none;">' + '</div>' + '<img src="img/commentBtn2.png" class="commenticon" style="display:none">' + '<div class="commentsbox" style="display:none;">' + '</div>' + '<div class="postinteraction">' + '<div class="likeBtn">' + '<img src="img/likeBtn.png">' + '<span>like</span>' + '</div>' + '<div class="commentBtn">' + '<img src="img/commentBtn.png">' + '<span>comment</span>' + '</div>' + '<img src="img/sharepost.png" class="sharepost">' + '<img src="img/flag.png" class="flagpost">' + '</div>' + '</div>');
+                    postsTracker.push(objectstring);
+                    arraycigPosts.push(objectstring);
+                }
+                }
+                getLikesCommentsFlags();
+
+                sharePost();
+                flagPost();
+                morePostsClick();
+                    /*if (results.length <= 2 ){
+                            $('#morePosts').hide();
+                        }*/
+
+            },
+            error: function(error) {
+                //alert("Error: " + error.code + " " + error.message);
+            }
+        });
+    }
 
 
 
@@ -1238,12 +1247,7 @@ var myTruncatedNameString = mynameString.substring(0,lengthName);
             $(this).parent().slideUp(300, function() {
                 $(this).remove();
             });
-            /*for(i=0; i<localStorage.length; i++) {
-if( !localStorage.getItem("task-"+i)) {
-localStorage.setItem("task-"+i, localStorage.getItem('task-' + (i+1) ) );
-localStorage.removeItem('task-'+ (i+1) );
-}
-}*/
+
         });
 
 
@@ -1251,43 +1255,18 @@ localStorage.removeItem('task-'+ (i+1) );
 
     });
     // Remove a task      
-    // Remove a task      
+    
     $('.removeThis').click(function() {
         localStorage.removeItem($(this).parent().attr("id"));
         $(this).parent().slideUp(300, function() {
             $(this).remove();
         });
-        /*for(i=0; i<localStorage.length; i++) {
-if( !localStorage.getItem("task-"+i)) {
-localStorage.setItem("task-"+i, localStorage.getItem('task-' + (i+1) ) );
-localStorage.removeItem('task-'+ (i+1) );
-}
-}*/
+
     });
 
-    /* $(".addafav").live("click", function() {
-var valuefav = $(this).parent().find('.taskSpan').html(); 
-localStorage.setItem( "fav-"+valuefav, valuefav);
-
-if (  $("#fav").val() != "" ) {
-$("#favsmokes").append("<li id='fav-" + valuefav + "'>"  + '<span class="taskSpan">' + valuefav + '</span>' + '<a href="#">x</a>'  + '</li>')
-$("#fav-" + valuefav).css('display', 'none');
-$("#fav-" + valuefav).fadeIn(350);
-i++;
-}
-});
-
-// Remove a fav      
-$("#favsmokes li a").live("click", function() {
-localStorage.removeItem($(this).parent().attr("id"));
-$(this).parent().slideUp(300, function() { $(this).remove(); } );
-});*/
 
 });
 
-/*document.addEventListener('touchmove', function (e) { 
-e.preventDefault(); 
-}, false);  */
 $('#locateicon').on('click', function() {
     onDeviceReady();
 
@@ -1316,18 +1295,7 @@ $('#cigarlisticon').click(function() {
     $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
     $('.indicatortopRated').show();
-/*
-    //$('#cigarslistForm').removeClass('fadeout').css('visibility','visible');
-    if ($('#cigardatabase').hasClass('level2') || $('#cigardatabase').hasClass('level3')) {
-        $('.indicatorsLeft').removeClass('commentactive');
 
-        $('.indicatorsLeft').removeClass('fadeout').addClass('titleactive');
-        var matchBrandName = $('#cigarslistNameWrapper ul').find('.cigartitle').attr('data-brand-cigar');
-        $('#brandTitle').html(matchBrandName + ' Cigars');
-        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
-        $('#cigardatabase, .indicatorsAdd').show();
-        return false;
-    }*/
 
     $('.indicatorsLeft').removeClass('commentactive');
     $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop').hide();
@@ -1347,14 +1315,12 @@ $('#myhumidoricon').on('click', function() {
     $('#listPage').show();
     $('#brandTitle').html('My Humidor');
 
-    //end of doucment ready
 });
 
 
 
 
 
-//autocomplete for adding cigar to taks list
 $(function() {
     var availableTags = [
 
@@ -1886,18 +1852,19 @@ $(function() {
     $("#task").autocomplete({
         source: availableTags
     });
+
+
+
+
+
+
+
 });
 
 
 
 
-//open Fav Page
-/*$('#favicon').on('click', function(){
-$('#listPage, #locatePage, #homePage, #statusUpdate').hide("slide", { direction: "right" }, 350);
-$('#favPage').show("slide", { direction: "right" }, 350)
 
-});*/
-//open Staus
 
 
 
@@ -2297,3 +2264,4 @@ for(i=0; i < elelist.length; i++){
         );
     }
     
+
