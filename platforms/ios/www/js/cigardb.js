@@ -46,7 +46,8 @@ $(document).ready(function() {
 
 			//on click match brand with cigar listings
 			$('.cigarbrand').click(function() {
-				$('#cigardatabase').hide();
+
+				$('#cigardatabase, .indicatortopRated').hide();
 				$('.indicatorsLeft, #cigarslistNameWrapper').show();
 				$('#cigardatabase').removeClass('level1');
 				$('#cigardatabase').addClass('level2');
@@ -429,6 +430,7 @@ $("#originSubmit").change(function () {
 			$('#cigardatabase').addClass('level1');
 			$(this).hide();
 			$('#brandTitle').html('brand');
+			$('.indicatortopRated').show();
 		}
 
 		if ($('#cigardatabase').hasClass('level3')) {
@@ -451,13 +453,15 @@ $("#originSubmit").change(function () {
 
 
     function getTopRated() {
+			setTimeout(function(){ 	$('.indicatortopRated').hide();},100);
+
     	 $('#topCigs').empty();
         //get user comments
         var topCount = [];
         var topRatedDatabase = Parse.Object.extend("RatingsObject");
         var queryRatings = new Parse.Query(topRatedDatabase);
         queryRatings.descending("cigarRating");
-        queryRatings.limit(25);
+        queryRatings.limit(150);
         queryRatings.find({
             success: function(results) {
                 for (var i = 0; i < results.length; i++) {
@@ -494,14 +498,21 @@ if(topName === topName){
             }
 
                 $('#topCigs li.cigartitle').click(function(){
-                		$('.closeToplevel2').show();
-                		$('.closeTop').hide();
-
 					$('#toplistWrapper').show();
 					$('#toplistWrapper').empty();
+					$('.closeTop').hide();
+					$('.indicatorsLeftTop').fadeIn();
+
+
 					setTimeout(function() {
 						$('#toplistWrapper').addClass('slideLeft');
 					}, 200);
+
+					$('.indicatorsLeftTop').click(function(){
+						$('#toplistWrapper').removeClass('slideLeft');
+						$(this).hide();
+						$('.closeTop').show();
+					});
 
 				var matchThisTitle = $(this).find('.topName').attr('data-topname');
 					var matchThisBrand = $(this).find('.topBrand').attr('data-topbrand');
@@ -667,10 +678,11 @@ if(topName === topName){
 
 
 $('.indicatortopRated').on('click', function(){
+			$(this).addClass('tapActive');
 	$('#brandTitle').html('Top Rated Cigars');
         $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
         $('#topratedPage, .closeTop').show();
-        $('.indicatortopRated').hide();
+        
 
         getTopRated();
 
@@ -683,14 +695,7 @@ $('.indicatortopRated').on('click', function(){
 		        $('#cigardatabase, .indicatorsAdd, .indicatortopRated').show();
 				$('#brandTitle').html('Brands');
       		 });
-	      	$('.closeToplevel2').click(function(){
-
-				$('#toplistWrapper, #cigardatabase, .indicatorsAdd').hide();
-				$('#topratedPage, .closeTop').show();
-				$(this).hide();
-		
-
-      		 });
+	
 
 
 });

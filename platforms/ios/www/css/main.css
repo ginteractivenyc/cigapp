@@ -82,11 +82,15 @@ ul,li {
 
 }
 
-.indicatorsLeft {
+.indicatorsLeft , .indicatorsLeftTop{
     width:35px;
     position:absolute;
     left:5px;
     top:5px;
+}
+
+.indicatorsLeftTop{
+    display: none;
 }
 
 .indicatorsAdd {
@@ -229,9 +233,7 @@ z-index: 99999999999999;
 -ms-transform: translateX(100%) translateY(0px);
 transform: translateX(100%) translateY(0px); 
 }
-#toplistWrapper{
-    top:0;
-}
+
 
 #cigarslistForm, #mapWrapperOuter, #statusInnerWrapper, .commentBox{
 display:block!important;
@@ -281,15 +283,15 @@ top: 5px;
 }
 
 .tapActive{
-  animation: tapAnimation linear 800ms;
+  animation: tapAnimation linear 300ms;
   animation-iteration-count: 1;
-  -webkit-animation: tapAnimation linear  800ms;
+  -webkit-animation: tapAnimation linear  300ms;
   -webkit-animation-iteration-count: 1;
-  -moz-animation: tapAnimation linear  800ms;
+  -moz-animation: tapAnimation linear  300ms;
   -moz-animation-iteration-count: 1;
-  -o-animation: tapAnimation linear  800ms;
+  -o-animation: tapAnimation linear  300ms;
   -o-animation-iteration-count: 1;
-  -ms-animation: tapAnimation linear  800ms;
+  -ms-animation: tapAnimation linear  300ms;
   -ms-animation-iteration-count: 1;
 }
 @keyframes tapAnimation{
@@ -601,6 +603,10 @@ left: 12px;
     width:85%;
     margin-bottom:8px;
     margin-left: 3px;
+}
+
+.commentsbox{
+    margin-top: -6px;
 }
 
 .likeBtn {

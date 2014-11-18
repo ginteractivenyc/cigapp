@@ -416,7 +416,7 @@ $("#fbLoginEmail").keyup(function(event){
         $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
         $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
         $('#locateicon').attr('src', 'img/locateicon.png').show();
-        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated').hide();
+        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop').hide();
         $('#statusUpdate, .statuscue').show();
         arraycigPosts.length = 0;
         console.log("this is arraycigs" + arraycigPosts.length);
@@ -1298,7 +1298,7 @@ $('#locateicon').on('click', function() {
     $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
 
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop').hide();
     $('#locatePage').show();
     $('#brandTitle').html('Locate a Cigar Bar or Shop');
 
@@ -1330,7 +1330,7 @@ $('#cigarlisticon').click(function() {
     }*/
 
     $('.indicatorsLeft').removeClass('commentactive');
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop').hide();
     $('#cigardatabase, .indicatorsAdd').show();
     $('#brandTitle').html('Brands');
 });
@@ -1343,7 +1343,7 @@ $('#myhumidoricon').on('click', function() {
     $('#locateicon').attr('src', 'img/locateicon.png').show();
     $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop').hide();
     $('#listPage').show();
     $('#brandTitle').html('My Humidor');
 
