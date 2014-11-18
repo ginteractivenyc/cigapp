@@ -154,62 +154,62 @@ reviewClick();
 							var addedTotal = eval(arraycigs.join('+'));
 							var summedTotal = addedTotal / lengthVal;
 							if (summedTotal === 5) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 							}
 							if (summedTotal === 4) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(5)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(5)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 							}
 							if (summedTotal === 3) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(4)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(4)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 							}
 							if (summedTotal === 2) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(3)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(3)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 							}
 							if (summedTotal === 1) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(1)').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(1)').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 
 							}
 							if (summedTotal > 4 && summedTotal < 5) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(5)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(5)').addClass('halfActive');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(5)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(5)').addClass('halfActive');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
 
 								return false;
 
 							}
 							
 							if (summedTotal > 3 && summedTotal < 4) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(4)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(4)').addClass('halfActive');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(4)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(4)').addClass('halfActive');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
 
 								return false;
 							}
 							if (summedTotal > 2 && summedTotal < 3) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(3)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(3)').addClass('halfActive');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(3)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(3)').addClass('halfActive');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
 
 								return false;
 							}
 							if (summedTotal > 1 && summedTotal < 2) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(2)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(2)').addClass('halfActive');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(2)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(2)').addClass('halfActive');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
 
 								return false;
 							}
@@ -595,62 +595,62 @@ if(topName === topName){
 							var addedTotal = eval(arraycigs.join('+'));
 							var summedTotal = addedTotal / lengthVal;
 							if (summedTotal === 5) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 							}
 							if (summedTotal === 4) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(5)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(5)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 							}
 							if (summedTotal === 3) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(4)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(4)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 							}
 							if (summedTotal === 2) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(3)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(3)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 							}
 							if (summedTotal === 1) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(1)').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(1)').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
 								return false;
 
 							}
 							if (summedTotal > 4 && summedTotal < 5) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(5)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(5)').addClass('halfActive');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(5)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(5)').addClass('halfActive');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
 
 								return false;
 
 							}
 							
 							if (summedTotal > 3 && summedTotal < 4) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(4)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(4)').addClass('halfActive');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(4)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(4)').addClass('halfActive');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
 
 								return false;
 							}
 							if (summedTotal > 2 && summedTotal < 3) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(3)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(3)').addClass('halfActive');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(3)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(3)').addClass('halfActive');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
 
 								return false;
 							}
 							if (summedTotal > 1 && summedTotal < 2) {
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(2)').prevAll('.star').addClass('active');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.star:nth-child(2)').addClass('halfActive');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.active').attr('src', 'img/cigarFilled.png?v=4');
-								$(".rating-container[data-id='" + nameofCigar + "']").find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(2)').prevAll('.star').addClass('active');
+								$(".rating-container").attr('data-id', nameofCigar).find('.star:nth-child(2)').addClass('halfActive');
+								$(".rating-container").attr('data-id', nameofCigar).find('.active').attr('src', 'img/cigarFilled.png?v=4');
+								$(".rating-container").attr('data-id', nameofCigar).find('.halfActive').attr('src', 'img/cigarHalfFilled.png?v=4');
 
 								return false;
 							}
