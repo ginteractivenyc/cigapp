@@ -47,6 +47,10 @@ ul,li {
     padding:0;
 }
 
+ul#topCigs{
+    padding-bottom:30px
+}
+
 #fblogin, #fblogout{
 	color:#ffffff;
 }
@@ -82,14 +86,14 @@ ul,li {
 
 }
 
-.indicatorsLeft , .indicatorsLeftTop{
+.indicatorsLeft , .indicatorsLeftTop, .indicatorsLeftNotify{
     width:35px;
     position:absolute;
     left:5px;
     top:5px;
 }
 
-.indicatorsLeftTop{
+.indicatorsLeftTop, .indicatorsLeftNotify{
     display: none;
 }
 
@@ -107,7 +111,13 @@ ul,li {
     top: 6px;
     display:none;
 }
-
+.indicatorNotify{
+     width:32px;
+    position:absolute;
+    left: 7px;
+    top: 6px;
+    display:none;   
+}
 
 
 

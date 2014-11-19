@@ -453,7 +453,7 @@ $("#originSubmit").change(function () {
 
 
     function getTopRated() {
-			setTimeout(function(){ 	$('.indicatortopRated').hide();},100);
+			$('.indicatortopRated').hide();
 
     	 $('#topCigs').empty();
         //get user comments
@@ -710,7 +710,7 @@ if(topName === topName){
 
 
 $('.indicatortopRated').on('click', function(){
-			$(this).addClass('tapActive');
+			//$(this).addClass('tapActive');
 	$('#brandTitle').html('Top Rated Cigars');
         $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
         $('#topratedPage, .closeTop').show();

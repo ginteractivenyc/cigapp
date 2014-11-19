@@ -375,6 +375,16 @@ $("#fbLoginEmail").keyup(function(event){
 
 
     $('#updateicon').on('click', function() {
+    /*$('.indicatorsLeftNotify').hide();
+    if($('#userNotWrapper ul').html().length >=1){
+        $('.indicatorNotify').show();
+$('.indicatorNotify').click(function(){
+    $('#userNotWrapper').addClass('slideLeft').show();
+   // $('#userNotWrapper ul').empty();
+});
+
+ }*/
+
         $('body').attr('id', 'status');
 
         if ($('body').attr('id') == 'status') {
@@ -390,6 +400,8 @@ $("#fbLoginEmail").keyup(function(event){
         arraycigPosts.length = 0;
         console.log("this is arraycigs" + arraycigPosts.length);
        setTimeout(function() {
+        $('#userNotWrapper ul').empty();
+        userNotificationIcon();
             getPostsOnLoad();
         }, 0);
 
@@ -957,33 +969,41 @@ function userNotification(){
                     var replyUser = object.get("replyUser");
 
                     if(replyUser === userString){
-
+                       
                          $('#statusUpdate, .statuscue').hide();
-
+                         //$('.indicatorNotify').show();
                          $('#userNotWrapper').addClass('slideLeft').show();
                          $('#userNotWrapper ul').append('<li data-post="' + postidget + '">' + commentuser + '<span class="topBrand"> commented on your post</span>' + '</li>');
                          var notiLength = $('#userNotWrapper ul li').length;
                          $('#brandTitle').html('<span style="font-size:16px">' + notiLength + '</span>' + " Notifications");
 
-                    }                    
+                    }                  
 
                 }
 
                  $('#userNotWrapper ul li').click(function(){
-                    postidArray.length = 0;
+                    $('.indicatorsLeftNotify').show();
+                   postidArray.length = 0;
                     var thisPost = $(this).attr('data-post');
                    postidArray.push(thisPost);
+
+                   $('.indicatorsLeftNotify').click(function(){
+                    $('#userPostWrapper').removeClass('slideLeft');
+                   $('.cigarpost#' + postidArray).remove();
+                });
+                    
+
                        getUserPost();
-                    querycomments.equalTo("postid", thisPost);
+                       querycomments.equalTo("postid", thisPost)
                             querycomments.find({
                                 success: function(results) {
                             for (var i = 0; i < results.length; i++) {
-
                                 var object = results[i];
+
                                     //object.unset("postid");
                                     object.unset("replyUser");
                                     object.save();
-                                }
+                                   }
                                 },
                                 error: function(error){
 
@@ -1267,6 +1287,28 @@ var myTruncatedNameString = mynameString.substring(0,lengthName);
 
 });
 
+
+
+
+$('#cigarlisticon').click(function() {
+
+    $('#cigarslistNameWrapper, #cigarslistWrapper').removeClass('slideLeft');
+    $(this).attr('src', 'img/cigarlisthover.png').show();
+    $(this).parent().addClass('footeractive');
+    $('#locateicon, #updateicon, #myhumidoricon').parent().removeClass('footeractive');
+    $('#locateicon').attr('src', 'img/locateicon.png').show();
+    $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
+    $('#updateicon').attr('src', 'img/updateicon.png').show();
+    $('.indicatortopRated').show();
+
+
+    $('.indicatorsLeft').removeClass('commentactive');
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop').hide();
+    $('#cigardatabase, .indicatorsAdd').show();
+    $('#brandTitle').html('Brands');
+});
+
+
 $('#locateicon').on('click', function() {
     onDeviceReady();
 
@@ -1284,24 +1326,6 @@ $('#locateicon').on('click', function() {
 
 });
 
-
-
-$('#cigarlisticon').click(function() {
-    $('#cigarslistNameWrapper, #cigarslistWrapper').removeClass('slideLeft');
-    $(this).attr('src', 'img/cigarlisthover.png').show();
-    $(this).parent().addClass('footeractive');
-    $('#locateicon, #updateicon, #myhumidoricon').parent().removeClass('footeractive');
-    $('#locateicon').attr('src', 'img/locateicon.png').show();
-    $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
-    $('#updateicon').attr('src', 'img/updateicon.png').show();
-    $('.indicatortopRated').show();
-
-
-    $('.indicatorsLeft').removeClass('commentactive');
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop').hide();
-    $('#cigardatabase, .indicatorsAdd').show();
-    $('#brandTitle').html('Brands');
-});
 
 
 $('#myhumidoricon').on('click', function() {
