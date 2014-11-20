@@ -375,7 +375,7 @@ $("#fbLoginEmail").keyup(function(event){
 
 
     $('#updateicon').on('click', function() {
-alert(postidArray);
+//alert(postidArray);
     $('#userNotWrapper ul li').attr('data-post', postidArray).remove();
 
     /*$('.indicatorsLeftNotify').hide();
