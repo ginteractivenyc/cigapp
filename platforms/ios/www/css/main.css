@@ -235,7 +235,7 @@ z-index: 99999999999999;
     background: #170D07;
 }
 
-#cigarslistNameWrapper, #cigarslistWrapper, #toplistWrapper, #userNotWrapper, #userPostWrapper{
+#cigarslistNameWrapper, #cigarslistWrapper, #toplistWrapper,  #userPostWrapper{
 
 	-moz-transform: translateX(100%) translateY(0px);
 -webkit-transform: translateX(100%) translateY(0px);

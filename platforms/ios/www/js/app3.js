@@ -375,6 +375,9 @@ $("#fbLoginEmail").keyup(function(event){
 
 
     $('#updateicon').on('click', function() {
+alert(postidArray);
+    $('#userNotWrapper ul li').attr('data-post', postidArray).remove();
+
     /*$('.indicatorsLeftNotify').hide();
     if($('#userNotWrapper ul').html().length >=1){
         $('.indicatorNotify').show();
@@ -384,6 +387,21 @@ $('.indicatorNotify').click(function(){
 });
 
  }*/
+
+
+    if($('#userNotWrapper ul').html().length >=1)
+    {
+        $('.indicatorNotify').show();
+    }else{
+        $('.indicatorNotify').hide();
+
+    }
+
+    $('.indicatorNotify').click(function(){
+       
+        $('#userNotWrapper').show();
+        $('#userPostWrapper').empty();
+    });
 
         $('body').attr('id', 'status');
 
@@ -400,8 +418,7 @@ $('.indicatorNotify').click(function(){
         arraycigPosts.length = 0;
         console.log("this is arraycigs" + arraycigPosts.length);
        setTimeout(function() {
-        $('#userNotWrapper ul').empty();
-        userNotificationIcon();
+        //$('#userNotWrapper ul').empty();
             getPostsOnLoad();
         }, 0);
 
@@ -972,7 +989,7 @@ function userNotification(){
                        
                          $('#statusUpdate, .statuscue').hide();
                          //$('.indicatorNotify').show();
-                         $('#userNotWrapper').addClass('slideLeft').show();
+                         $('#userNotWrapper').show();
                          $('#userNotWrapper ul').append('<li data-post="' + postidget + '">' + commentuser + '<span class="topBrand"> commented on your post</span>' + '</li>');
                          var notiLength = $('#userNotWrapper ul li').length;
                          $('#brandTitle').html('<span style="font-size:16px">' + notiLength + '</span>' + " Notifications");
@@ -986,10 +1003,10 @@ function userNotification(){
                    postidArray.length = 0;
                     var thisPost = $(this).attr('data-post');
                    postidArray.push(thisPost);
-
+                   $('#userPostWrapper').find('#' + thisPost ).remove();
                    $('.indicatorsLeftNotify').click(function(){
                     $('#userPostWrapper').removeClass('slideLeft');
-                   $('.cigarpost#' + postidArray).remove();
+
                 });
                     
 
@@ -1303,9 +1320,10 @@ $('#cigarlisticon').click(function() {
 
 
     $('.indicatorsLeft').removeClass('commentactive');
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop, .indicatorNotify').hide();
     $('#cigardatabase, .indicatorsAdd').show();
     $('#brandTitle').html('Brands');
+
 });
 
 
@@ -1319,7 +1337,7 @@ $('#locateicon').on('click', function() {
     $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
 
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify').hide();
     $('#locatePage').show();
     $('#brandTitle').html('Locate a Cigar Bar or Shop');
 
@@ -1335,7 +1353,7 @@ $('#myhumidoricon').on('click', function() {
     $('#locateicon').attr('src', 'img/locateicon.png').show();
     $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify').hide();
     $('#listPage').show();
     $('#brandTitle').html('My Humidor');
 
