@@ -75,6 +75,7 @@ function keyboardShowHandler(e){
                                 $('#statusUpdate, #cigarfooter').show("slide", {
                                     direction: "right"
                                 }, 200);
+                                  getPostsOnLoad();
                                  userNotification();
                                 $('#userSlider').fadeIn();
                                                     
@@ -121,6 +122,7 @@ function keyboardShowHandler(e){
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
+                             getPostsOnLoad();
                              userNotification();
                              $('#userSlider').remove();
 
@@ -163,6 +165,7 @@ function keyboardShowHandler(e){
         $('#statusUpdate, .statuscue').show();
         $('.indicatorsLeft, .indicatorsAdd').hide();
         $('#cigarfooter').show();
+            getPostsOnLoad();
          userNotification();
         $('#fileselect').attr('data-name', nameCurrent);
         
@@ -196,6 +199,7 @@ $("#signup").keyup(function(event){
                     $('.indicatorsLeft, .indicatorsAdd').hide();
                     $('#statusUpdate, .statuscue').show();
                     $('#brandTitle').html('CLIQUE FEED');
+                        getPostsOnLoad();
                      userNotification();
                     $('#statusUpdate, #cigarfooter').show("slide", {
                         direction: "right"
@@ -286,6 +290,7 @@ $("#login").keyup(function(event){
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
                              $('#userSlider').remove();
+                                 getPostsOnLoad();
                          userNotification();
                            
                             // Do stuff after successful login.
@@ -356,6 +361,7 @@ $("#fbLoginEmail").keyup(function(event){
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
                             $('#brandTitle').html('CLIQUE FEED');
+                                getPostsOnLoad();
                              userNotification();
                             // Do stuff after successful login.
 
@@ -375,22 +381,12 @@ $("#fbLoginEmail").keyup(function(event){
 
 
     $('#updateicon').on('click', function() {
-//alert(postidArray);
-    $('#userNotWrapper ul li').attr('data-post', postidArray).remove();
 
-    /*$('.indicatorsLeftNotify').hide();
-    if($('#userNotWrapper ul').html().length >=1){
-        $('.indicatorNotify').show();
-$('.indicatorNotify').click(function(){
-    $('#userNotWrapper').addClass('slideLeft').show();
-   // $('#userNotWrapper ul').empty();
-});
-
- }*/
-
-
-    if($('#userNotWrapper ul').html().length >=1)
+        userNotification();
+$('#userPostWrapper ').empty();
+    if($('#userNotWrapper ul li').length >=1)
     {
+    
         $('.indicatorNotify').show();
     }else{
         $('.indicatorNotify').hide();
@@ -398,9 +394,11 @@ $('.indicatorNotify').click(function(){
     }
 
     $('.indicatorNotify').click(function(){
-       
+        $(this).hide();
+       //alert(postidArray);
         $('#userNotWrapper').show();
-        $('#userPostWrapper').empty();
+        //$('#userNotWrapper ul li').attr('data-post', postidArray);
+        //$('#userPostWrapper').empty();
     });
 
         $('body').attr('id', 'status');
@@ -413,7 +411,7 @@ $('.indicatorNotify').click(function(){
         $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
         $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
         $('#locateicon').attr('src', 'img/locateicon.png').show();
-        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop').hide();
+        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorsLeftNotify, .closeTop').hide();
         $('#statusUpdate, .statuscue').show();
         arraycigPosts.length = 0;
         console.log("this is arraycigs" + arraycigPosts.length);
@@ -609,7 +607,7 @@ $('.logohome').hide();
 
 
 
-    getPostsOnLoad();
+
 
     function getPostsOnLoad() {
 
@@ -657,8 +655,6 @@ $('.logohome').hide();
 
 
     function getLikesCommentsFlags() {
-        getIfCommentExists();
-        getIfLikeExists();
         getLikes();
         getUserComments();
         getFlaggedPosts();
@@ -905,6 +901,7 @@ alert("Posts are loading");
                 var LikesDatabase = Parse.Object.extend("LikesDatabase");
                 var queryremovelikes = new Parse.Query(LikesDatabase);
                 var closestID = $(this).parent().closest('.cigarpost').attr('id');
+
                 //console.log(closestID);
                 $(this).parent().closest('.cigarpost').find('.likeposted:last-child').remove();
                 $(this).parent().closest('.cigarpost').find('.likeposted:last-child').find('.comma:last-child').hide();
@@ -941,6 +938,7 @@ alert("Posts are loading");
                 var likesDatabase = new LikesDatabase();
                 var commentItem = "like";
                 var currentUser = Parse.User.current();
+               var replyUser = $(this).parent().closest('.cigarpost').find('.postuser').text();
 
                 var nameCurrent = currentUser.getUsername();
                 $(this).parent().closest('.cigarpost').find('.likeicon, .likesbox').show();
@@ -955,6 +953,7 @@ alert("Posts are loading");
                 likesDatabase.set("username", nameCurrent);
                 likesDatabase.set("userlikes", commentItem);
                 likesDatabase.set("postid", postId);
+                likesDatabase.set("replyUser", replyUser);
                 likesDatabase.save({
                     success: function() {
                         //getsingleLike();
@@ -973,9 +972,12 @@ alert("Posts are loading");
 
 
 function userNotification(){
+    $('#userNotWrapper ul').empty();
         var CommentsDatabase = Parse.Object.extend("CommentsDatabase");
         var querycomments = new Parse.Query(CommentsDatabase);
         var userString = userArrayLogged.toString();
+                     var replyUser = $(this).parent().closest('.cigarpost').find('.postuser').text();
+
         querycomments.descending("createdAt");
         querycomments.find({
             success: function(results) {
@@ -990,7 +992,7 @@ function userNotification(){
                          $('#statusUpdate, .statuscue').hide();
                          //$('.indicatorNotify').show();
                          $('#userNotWrapper').show();
-                         $('#userNotWrapper ul').append('<li data-post="' + postidget + '">' + commentuser + '<span class="topBrand"> commented on your post</span>' + '</li>');
+                         $('#userNotWrapper ul').append('<li class="commentsclick" data-post="' + postidget + '">' + commentuser + '<span class="topBrand"> commented on your post</span>' + '</li>');
                          var notiLength = $('#userNotWrapper ul li').length;
                          $('#brandTitle').html('<span style="font-size:16px">' + notiLength + '</span>' + " Notifications");
 
@@ -998,19 +1000,22 @@ function userNotification(){
 
                 }
 
-                 $('#userNotWrapper ul li').click(function(){
+                 $('#userNotWrapper ul li.commentsclick').click(function(){
                     $('.indicatorsLeftNotify').show();
                    postidArray.length = 0;
                     var thisPost = $(this).attr('data-post');
                    postidArray.push(thisPost);
                    $('#userPostWrapper').find('#' + thisPost ).remove();
                    $('.indicatorsLeftNotify').click(function(){
+                    $(this).hide();
                     $('#userPostWrapper').removeClass('slideLeft');
-
-                });
+                    $('#userPostWrapper').empty();
+                    });
                     
 
+                       setTimeout(function(){
                        getUserPost();
+                   },10);
                        querycomments.equalTo("postid", thisPost)
                             querycomments.find({
                                 success: function(results) {
@@ -1039,6 +1044,81 @@ function userNotification(){
             }
         });
 
+
+
+        var LikesDatabase = Parse.Object.extend("LikesDatabase");
+        var querylikes = new Parse.Query(LikesDatabase);
+        var userString = userArrayLogged.toString();
+        querylikes.descending("createdAt");
+        querylikes.find({
+            success: function(results) {
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    var likeuser = object.get("username");
+                    var postidget = object.get("postid");
+                    var replyUser = object.get("replyUser");
+
+                    if(replyUser === userString){
+                       
+                         $('#statusUpdate, .statuscue').hide();
+                         //$('.indicatorNotify').show();
+                         $('#userNotWrapper').show();
+                         $('#userNotWrapper ul').append('<li class="likesclick"  data-post="' + postidget + '">' + likeuser + '<span class="topBrand"> liked your post</span>' + '</li>');
+                         var notiLength = $('#userNotWrapper ul li').length;
+                         $('#brandTitle').html('<span style="font-size:16px">' + notiLength + '</span>' + " Notifications");
+
+                    }                  
+
+                }
+
+                 $('#userNotWrapper ul li.likesclick').click(function(){
+                    $('.indicatorsLeftNotify').show();
+                   postidArray.length = 0;
+                    var thisPost = $(this).attr('data-post');
+                   postidArray.push(thisPost);
+                   $('#userPostWrapper').find('#' + thisPost ).remove();
+                   $('.indicatorsLeftNotify').click(function(){
+                    $(this).hide();
+                    $('#userPostWrapper').removeClass('slideLeft');
+                    $('#userPostWrapper').empty();
+                    });
+                    
+
+                      
+                    setTimeout(function(){
+                       getUserPost();
+                   },10);
+                       querylikes.equalTo("postid", thisPost)
+                            querylikes.find({
+                                success: function(results) {
+                            for (var i = 0; i < results.length; i++) {
+                                var object = results[i];
+
+                                    //object.unset("postid");
+                                    object.unset("replyUser");
+                                    object.save();
+                                   }
+                                },
+                                error: function(error){
+
+                                }
+                            });
+
+
+
+
+                    });
+                // The object was retrieved successfully.
+            },
+            error: function(object, error) {
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and description.
+            }
+        });
+
+
+
+
 }
 
 
@@ -1066,16 +1146,17 @@ function userNotification(){
                     var postupdate = object.get('statusupdate');
                     if(objectstring === postidArray.toString()){
                         
-                    $('#userPostWrapper').append('<div class="cigarpost" id="' + postidArray + '">' + '<span class="postuser">' + postNameUser + '</span>' + '<div class="imgpost">' + '<img class="postcigimg" data-name="' + postNameUser + '"' + 'src="' + imageURL + '"' + 'width="294"' + '">' + '</div>' + '<span class="statusupdate">' + postupdate + '</span>' + '<img src="img/likeBtn2.png" class="likeicon" style="display:none;">' + '<div class="likesbox" style="display:none;">' + '</div>' + '<img src="img/commentBtn2.png" class="commenticon" style="display:none">' + '<div class="commentsbox" style="display:none;">' + '</div>' + '<div class="postinteraction">' + '<div class="likeBtn">' + '<img src="img/likeBtn.png">' + '<span>like</span>' + '</div>' + '<div class="commentBtn">' + '<img src="img/commentBtn.png">' + '<span>comment</span>' + '</div>' + '<img src="img/sharepost.png" class="sharepost">' + '<img src="img/flag.png" class="flagpost">' + '</div>' + '</div>');
+                    $('#userPostWrapper').append('<div class="cigarpost" id="' + postidArray + '">' + '<span class="postuser">' + postNameUser + '</span>' + '<div class="imgpost">' + '<img class="postcigimg" data-name="' + postNameUser + '"' + 'src="' + imageURL + '"' + 'width="294"' + '">' + '</div>' + '<span class="statusupdate">' + postupdate + '</span>' + '<img src="img/likeBtn2.png" class="likeicon" style="display:none;">' + '<div class="likesbox" style="display:none;">' + '</div>' + '<img src="img/commentBtn2.png" class="commenticon" style="display:none">' + '<div class="commentsbox" style="display:block;">' + '</div>' + '<div class="postinteraction">' + '<div class="likeBtn">' + '<img src="img/likeBtn.png">' + '<span>like</span>' + '</div>' + '<div class="commentBtn">' + '<img src="img/commentBtn.png">' + '<span>comment</span>' + '</div>' + '<img src="img/sharepost.png" class="sharepost">' + '</div>' + '</div>');
                     postsTracker.push(objectstring);
                     arraycigPosts.push(objectstring);
                 }
                 }
-                getLikesCommentsFlags();
 
+                getLikesNotify();
+                getUserCommentsNotify();
                 sharePost();
-                flagPost();
-                morePostsClick();
+                likeClick();
+                commentClick();
                     /*if (results.length <= 2 ){
                             $('#morePosts').hide();
                         }*/
@@ -1095,6 +1176,7 @@ function userNotification(){
         //get user comments
         var CommentsDatabase = Parse.Object.extend("CommentsDatabase");
         var querycomments = new Parse.Query(CommentsDatabase);
+        querycomments.ascending('createdAt');
         querycomments.find({
             success: function(results) {
                 for (var i = 0; i < results.length; i++) {
@@ -1102,6 +1184,8 @@ function userNotification(){
                     var commentuser = object.get("username");
                     var comment = object.get("usercomments");
                     var postidget = object.get("postid");
+                 $('#' + postidget).find('.commenticon, .commentsbox').show();
+
                     $('#' + postidget).find('.commentsbox').append('<div class="commentposted">' + '<div class="commentUser">' + commentuser + '</div>' + '<div class="commentPost">' + comment + '</div>' + '</div>');
                 }
                 // The object was retrieved successfully.
@@ -1113,52 +1197,7 @@ function userNotification(){
         });
     }
 
-    function getIfCommentExists() {
-        //get user comment
-        var CommentsDatabase = Parse.Object.extend("CommentsDatabase");
-        var querycomments = new Parse.Query(CommentsDatabase);
-        querycomments.find({
-            success: function(results) {
-                for (var i = 0; i < results.length; i++) {
-                    var object = results[i];
-                    var postid = object.get("postid");
-                    $('#' + postid).find('.commenticon, .commentsbox').show();
-                }
 
-                // The object was retrieved successfully.
-            },
-            error: function(object, error) {
-                // The object was not retrieved successfully.
-                // error is a Parse.Error with an error code and description.
-            }
-        });
-
-    }
-
-    function getIfLikeExists() {
-
-        //get user like
-        var LikesDatabase = Parse.Object.extend("LikesDatabase");
-        var querylikes = new Parse.Query(LikesDatabase);
-        querylikes.find({
-            success: function(results) {
-                for (var i = 0; i < results.length; i++) {
-                    var object = results[i];
-                    var postid = object.get("postid");
-
-                    $('#' + postid).find('.likeicon, .likesbox').show();
-
-                }
-
-                // The object was retrieved successfully.
-            },
-            error: function(object, error) {
-                // The object was not retrieved successfully.
-                // error is a Parse.Error with an error code and description.
-            }
-        });
-
-    }
 
 
     function getLikes() {
@@ -1173,6 +1212,8 @@ function userNotification(){
                     var likeuser = object.get("username");
                     //var likes = object.get("userlikes");
                     var postidget = object.get("postid");
+                   $('#' + postidget).find('.likeicon, .likesbox').show();
+
                     $('#' + postidget).find('.likesbox').append('<div class="likeposted">' + '<div class="likeUser">' + likeuser + '<span class="comma">,</span>' + '</div>' + '</div>');
 
                     if (likeuser == userArrayLogged) {
@@ -1194,6 +1235,75 @@ function userNotification(){
         });
 
     }
+
+
+//notification 
+ function getUserCommentsNotify() {
+        //get user comments
+        var CommentsDatabase = Parse.Object.extend("CommentsDatabase");
+        var querycomments = new Parse.Query(CommentsDatabase);
+        querycomments.ascending('createdAt');
+         querycomments.equalTo('postid', postidArray.toString());
+        querycomments.find({
+            success: function(results) {
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    var commentuser = object.get("username");
+                    var comment = object.get("usercomments");
+                 $('#userPostWrapper >' + '#' + postidArray).find('.commenticon, .commentsbox').show();
+
+                    $('#userPostWrapper >' +  '#' + postidArray).find('.commentsbox').append('<div class="commentposted">' + '<div class="commentUser">' + commentuser + '</div>' + '<div class="commentPost">' + comment + '</div>' + '</div>');
+                }
+                // The object was retrieved successfully.
+            },
+            error: function(object, error) {
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and description.
+            }
+        });
+    }
+
+
+
+
+    function getLikesNotify() {
+        //get user like
+        var LikesDatabase = Parse.Object.extend("LikesDatabase");
+        var querylikes = new Parse.Query(LikesDatabase);
+        querylikes.equalTo('postid', postidArray.toString());
+        querylikes.find({
+            success: function(results) {
+                for (var i = 0; i < results.length; i++) {
+                    var object = results[i];
+                    var likeuser = object.get("username");
+                    //var likes = object.get("userlikes");
+                    $('#userPostWrapper >' + '#' + postidArray).find('.likeicon, .likesbox').show();
+
+                    $('#userPostWrapper >' +'#' + postidArray).find('.likesbox').append('<div class="likeposted">' + '<div class="likeUser">' + likeuser + '<span class="comma">,</span>' + '</div>' + '</div>');
+
+                    if (likeuser == userArrayLogged) {
+                        $('#userPostWrapper >' +'#' + postidArray).find('.likeBtn').addClass('likeactive');
+                        $('#userPostWrapper >' +'#' + postidArray).find('.likeBtn').find('img').attr('src', 'img/likeBtn2.png');
+                    }
+
+
+                }
+                $('.likeposted:last-child').find('.comma').remove();
+
+
+                // The object was retrieved successfully.
+            },
+            error: function(object, error) {
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and description.
+            }
+        });
+
+    }
+
+
+
+
 
 
 
@@ -1320,7 +1430,7 @@ $('#cigarlisticon').click(function() {
 
 
     $('.indicatorsLeft').removeClass('commentactive');
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop, .indicatorNotify').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop, .indicatorNotify, .indicatorsLeftNotify').hide();
     $('#cigardatabase, .indicatorsAdd').show();
     $('#brandTitle').html('Brands');
 
@@ -1337,7 +1447,7 @@ $('#locateicon').on('click', function() {
     $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
 
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify, .closeTop, .indicatorsLeftNotify').hide();
     $('#locatePage').show();
     $('#brandTitle').html('Locate a Cigar Bar or Shop');
 
@@ -1353,7 +1463,7 @@ $('#myhumidoricon').on('click', function() {
     $('#locateicon').attr('src', 'img/locateicon.png').show();
     $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify, .closeTop, .indicatorsLeftNotify').hide();
     $('#listPage').show();
     $('#brandTitle').html('My Humidor');
 

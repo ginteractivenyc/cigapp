@@ -712,7 +712,7 @@ if(topName === topName){
 $('.indicatortopRated').on('click', function(){
 			//$(this).addClass('tapActive');
 	$('#brandTitle').html('Top Rated Cigars');
-        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd').hide();
+        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatorsLeftNotify').hide();
         $('#topratedPage, .closeTop').show();
         
 
