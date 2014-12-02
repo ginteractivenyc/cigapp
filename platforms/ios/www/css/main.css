@@ -105,12 +105,32 @@ ul#topCigs{
 }
 
 .indicatortopRated{
-    width:32px;
-    position:absolute;
-    right: 40px;
-    top: 6px;
+width:32px;
+position:absolute;
+right: 40px;
+top: 6px;
     display:none;
 }
+
+
+.indicatorRecco{
+width: 35px;
+position: absolute;
+left: 10px;
+top: 6px;
+display: none;
+}
+
+
+.infoicon{
+width: 30px;
+position: absolute;
+right: 10px;
+top: 7px;
+display: none;
+}
+
+
 .indicatorNotify{
      width:32px;
     position:absolute;
@@ -235,7 +255,7 @@ z-index: 99999999999999;
     background: #170D07;
 }
 
-#cigarslistNameWrapper, #cigarslistWrapper, #toplistWrapper,  #userPostWrapper{
+#cigarslistNameWrapper, #cigarslistWrapper, #toplistWrapper,  #userPostWrapper, #reccolistWrapper{
 
 	-moz-transform: translateX(100%) translateY(0px);
 -webkit-transform: translateX(100%) translateY(0px);
@@ -696,6 +716,7 @@ display: inline;
 /* float: left; */
 color: #d19538;
 margin-right: 5px;
+white-space: pre;
 }
 
 .likeposted {
@@ -721,6 +742,8 @@ display: inline;
 letter-spacing: normal;
 /* padding-left: 5px; */
 color: #c4c4c4;
+word-wrap: break-word;
+
 }
 
 .sendComment{
@@ -913,7 +936,7 @@ margin-left: 30%;
     left:20%;
     border:none;
     padding:7px 2px;
-    font-family:'Raleway',sans-serif;
+    font-family:'Montserrat',sans-serif;
     font-size:15px;
     font-weight:500;
 }
@@ -936,7 +959,7 @@ margin-left: 30%;
     left:50%;
     border:none;
     padding:7px 2px;
-    font-family:'Raleway',sans-serif;
+    font-family:'Montserrat',sans-serif;
     font-size:15px;
     font-weight:500;
 }
@@ -1172,6 +1195,10 @@ textarea#status {
     display:none;
 }
 
+ul#places{
+    padding-bottom:70px;
+}
+
 /* cigar feed*/
 #cigardbWrapper {
     overflow:scroll;
@@ -1182,7 +1209,7 @@ textarea#status {
    padding-bottom:70px;
 }
 
-#cigarslistWrapper li, #toplistWrapper li {
+#cigarslistWrapper li, #toplistWrapper li, #reccolistWrapper li {
     border-bottom:none;
     list-style:none;
     padding:5px;
@@ -1618,6 +1645,7 @@ text-align: center;
 
 .addedComment{
    padding: 0 0 5px 0 !important;
+   white-space: normal;
 }
 
 .commentsList{
@@ -1665,3 +1693,4 @@ transform: translateX(0%) translateY(100%);
     color:#c4c4c4;
     font-size:12px;
 }
+

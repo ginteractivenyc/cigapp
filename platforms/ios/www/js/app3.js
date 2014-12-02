@@ -71,7 +71,7 @@ function keyboardShowHandler(e){
                                 $('#dbHeader').show();
                                 $('.indicatorsLeft, .indicatorsAdd').hide();
                                 $('#statusUpdate, .statuscue').show();
-                                $('#brandTitle').html('CLIQUE FEED');
+                                $('#brandTitle').html('CLIQUE');
                                 $('#statusUpdate, #cigarfooter').show("slide", {
                                     direction: "right"
                                 }, 200);
@@ -121,7 +121,7 @@ function keyboardShowHandler(e){
                             $('#statusUpdate, .statuscue').show('');
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
-                            $('#brandTitle').html('CLIQUE FEED');
+                            $('#brandTitle').html('CLIQUE');
                              getPostsOnLoad();
                              userNotification();
                              $('#userSlider').remove();
@@ -161,7 +161,7 @@ function keyboardShowHandler(e){
         //$('body').append(nameCurrent + ' is logged in');
         $('#homePage, #form#signup, #hometitle, .logohome, #passwordReset').hide();
         $('#dbHeader').show();
-        $('#brandTitle').html('CLIQUE FEED');
+        $('#brandTitle').html('CLIQUE');
         $('#statusUpdate, .statuscue').show();
         $('.indicatorsLeft, .indicatorsAdd').hide();
         $('#cigarfooter').show();
@@ -198,7 +198,7 @@ $("#signup").keyup(function(event){
                     $('#dbHeader').show();
                     $('.indicatorsLeft, .indicatorsAdd').hide();
                     $('#statusUpdate, .statuscue').show();
-                    $('#brandTitle').html('CLIQUE FEED');
+                    $('#brandTitle').html('CLIQUE');
                         getPostsOnLoad();
                      userNotification();
                     $('#statusUpdate, #cigarfooter').show("slide", {
@@ -288,7 +288,7 @@ $("#login").keyup(function(event){
                             $('#statusUpdate, .statuscue').show();
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
-                            $('#brandTitle').html('CLIQUE FEED');
+                            $('#brandTitle').html('CLIQUE');
                              $('#userSlider').remove();
                                  getPostsOnLoad();
                          userNotification();
@@ -360,7 +360,7 @@ $("#fbLoginEmail").keyup(function(event){
                             $('#statusUpdate, .statuscue').show('');
                             $('#dbHeader').show();
                             $('#cigarfooter').show();
-                            $('#brandTitle').html('CLIQUE FEED');
+                            $('#brandTitle').html('CLIQUE');
                                 getPostsOnLoad();
                              userNotification();
                             // Do stuff after successful login.
@@ -411,7 +411,7 @@ $('#userPostWrapper ').empty();
         $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
         $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
         $('#locateicon').attr('src', 'img/locateicon.png').show();
-        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorsLeftNotify, .closeTop').hide();
+        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorsLeftNotify, .closeTop, .indicatorRecco, .infoicon').hide();
         $('#statusUpdate, .statuscue').show();
         arraycigPosts.length = 0;
         console.log("this is arraycigs" + arraycigPosts.length);
@@ -420,7 +420,7 @@ $('#userPostWrapper ').empty();
             getPostsOnLoad();
         }, 0);
 
-        $('#brandTitle').html('Clique Feed');
+        $('#brandTitle').html('Clique');
 
         addStatus();
     });
@@ -1426,11 +1426,11 @@ $('#cigarlisticon').click(function() {
     $('#locateicon').attr('src', 'img/locateicon.png').show();
     $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
-    $('.indicatortopRated').show();
+    $('.indicatortopRated, .indicatorRecco').show();
 
 
     $('.indicatorsLeft').removeClass('commentactive');
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop, .indicatorNotify, .indicatorsLeftNotify').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop, .indicatorNotify, .indicatorsLeftNotify, .infoicon').hide();
     $('#cigardatabase, .indicatorsAdd').show();
     $('#brandTitle').html('Brands');
 
@@ -1438,7 +1438,6 @@ $('#cigarlisticon').click(function() {
 
 
 $('#locateicon').on('click', function() {
-    onDeviceReady();
 
     $(this).attr('src', 'img/locateiconhover.png').show();
     $(this).parent().addClass('footeractive');
@@ -1446,8 +1445,8 @@ $('#locateicon').on('click', function() {
     $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
     $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
-
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify, .closeTop, .indicatorsLeftNotify').hide();
+onDeviceReady();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify, .closeTop, .indicatorsLeftNotify, .indicatorRecco, .infoicon').hide();
     $('#locatePage').show();
     $('#brandTitle').html('Locate a Cigar Bar or Shop');
 
@@ -1463,7 +1462,7 @@ $('#myhumidoricon').on('click', function() {
     $('#locateicon').attr('src', 'img/locateicon.png').show();
     $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify, .closeTop, .indicatorsLeftNotify').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify, .closeTop, .indicatorsLeftNotify, .indicatorRecco, .infoicon').hide();
     $('#listPage').show();
     $('#brandTitle').html('My Humidor');
 
@@ -2029,6 +2028,7 @@ function onDeviceReady() {
 // onSuccess Geolocation
 //
 function onSuccess(position) {
+    $('#places').empty();
     var myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     map = new google.maps.Map(document.getElementById('geoLocation'), {
@@ -2416,4 +2416,11 @@ for(i=0; i < elelist.length; i++){
         );
     }
     
-
+        function reccoAlert() {
+        navigator.notification.alert(
+            "We've recommended some cigars for you, based on your activity",  // message
+            alertDismissed10,         // callback
+            'Cigar Clique',            // title
+            'Ok'                  // buttonName
+        );
+    }
