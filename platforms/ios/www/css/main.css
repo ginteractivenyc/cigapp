@@ -29,6 +29,14 @@ border: 1px solid rgba(255,255,255,0.3);
 
 }
 
+.spinner{
+position: absolute;
+width: 0px;
+z-index: 2000000000;
+top: 30%;
+left: 50%;
+}
+
 .inactiveselect{
     color: #c4c4c4;
 
@@ -87,10 +95,10 @@ ul#topCigs{
 }
 
 .indicatorsLeft , .indicatorsLeftTop, .indicatorsLeftNotify{
-    width:35px;
-    position:absolute;
-    left:5px;
-    top:5px;
+width:28px;
+position:absolute;
+left:5px;
+top:8px;
 }
 
 .indicatorsLeftTop, .indicatorsLeftNotify{
@@ -98,35 +106,35 @@ ul#topCigs{
 }
 
 .indicatorsAdd {
-    width:32px;
-    position:absolute;
-	right: 5px;
-	top: 6px;
+    width:27px;
+   position:absolute;
+   right: 5px;
+   top: 7px;
 }
 
 .indicatortopRated{
-width:32px;
+width:28px;
 position:absolute;
 right: 40px;
-top: 6px;
+top: 7px;
     display:none;
 }
 
 
 .indicatorRecco{
-width: 35px;
+width: 28px;
 position: absolute;
 left: 10px;
-top: 6px;
+top: 8px;
 display: none;
 }
 
 
 .infoicon{
-width: 30px;
+width: 24px;
 position: absolute;
 right: 10px;
-top: 7px;
+top: 11px;
 display: none;
 }
 
@@ -305,11 +313,11 @@ transform: translateX(0px) translateY(120%);
 
 .statuscue {
  display: block;
-width: 10%;
+width: 28px;
 position: absolute;
-right: 2px;
+right: 8px;
 z-index: 999999;
-top: 5px;
+top: 8px;
 }
 
 .tapActive{
@@ -420,7 +428,7 @@ top: 5px;
 }
 
 #statusupdateform, .commentSubmit {
-width: 260px;
+width: 290px;
 height: 50px;
 background: #c4c4c4;
 margin-left: 8px;
@@ -431,8 +439,8 @@ border-radius: 0!important;
 }
 
 .adjustTextArea{
-    padding-left:45px!important;
-    width:280px!important;
+padding-left:55px!important;
+width:245px!important;
 }
 
 .commentSubmit {
@@ -519,7 +527,7 @@ position: absolute;
 /* clear: both; */
 z-index: 999999;
 top: 100px;
-left: 80px;
+left: 65px;
 
 }
 
@@ -537,7 +545,7 @@ width: 105px;
 
 .fileUpload {
 overflow: hidden;
-margin: 10px;
+/*margin: 10px;*/
 margin-top: 3px;
 float: left;
 position: relative;
@@ -567,7 +575,7 @@ background-size: cover;
 /* clear: left; */
 position: absolute;
 top: 105px;
-left: 20px;
+left: 10px;
 }
 
 span.postbtn {
@@ -1575,8 +1583,8 @@ left: 27%;
 .closestatus, .closeTop, .closeToplevel2{
 	position: absolute;
 	top:10px;
-	left:0;
-	width:32px;
+left:2px;
+width:28px;
 }
 .closeTop, .closeToplevel2{
     display:none;
@@ -1591,8 +1599,8 @@ left: 27%;
     width:40px;
     height:40px;
     position: absolute;
-    top:45px;
-    left: 20px;
+top:48px;
+left: 15px;
     z-index:9999999!important;
 }
 

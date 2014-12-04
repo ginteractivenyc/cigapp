@@ -478,6 +478,7 @@ $("#originSubmit").change(function () {
         queryRatings.limit(150);
         queryRatings.find({
             success: function(results) {
+            	$('.spinner').hide();
                 for (var i = 0; i < results.length; i++) {
 
                     var object = results[i];
@@ -762,6 +763,7 @@ if(topName === topName){
        queryRatings.equalTo("username", currentUser);
         queryRatings.find({
             success: function(results) {
+            	$('.spinner').hide();
                 for (var i = 0; i < results.length; i++) {
 
                     var object = results[i];
@@ -1063,6 +1065,7 @@ strengthFinalString.push(maxEl);
 
 
 $('.indicatortopRated').on('click', function(){
+	spinFunction();
 			//$(this).addClass('tapActive');
 	$('#brandTitle').html('Top Rated Cigars');
         $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatorsLeftNotify').hide();
@@ -1075,6 +1078,7 @@ $('.indicatortopRated').on('click', function(){
 
 
 $('.indicatorRecco').on('click', function(){
+	spinFunction();
 			//$(this).addClass('tapActive');
 	$('#brandTitle').html('Recommended For Me');
         $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatorsLeftNotify').hide();
@@ -1118,7 +1122,37 @@ function toTitleCase(str) {
 }
 
 
-
+        var spinFunction = function() {
+            var opts = {
+                lines: 10, // The number of lines to draw
+                length: 7, // The length of each line
+                width: 4, // The line thickness
+                radius: 10, // The radius of the inner circle
+                corners: 1, // Corner roundness (0..1)
+                rotate: 0, // The rotation offset
+                color: '#d19538', // #rgb or #rrggbb
+                speed: 1, // Rounds per second
+                trail: 60, // Afterglow percentage
+                shadow: false, // Whether to render a shadow
+                hwaccel: false, // Whether to use hardware acceleration
+                className: 'spinner', // The CSS class to assign to the spinner
+                zIndex: 9999999, // The z-index (defaults to 2000000000)
+                top: 25, // Top position relative to parent in px
+                left: 110 // Left position relative to parent in px
+            };
+            var target = document.getElementById('appContainer');
+            var loading;
+            loading = false;
+            if (loading == false) {
+                var spinner = new Spinner(opts).spin(target);
+            }
+            loading = true;
+            if (loading == true) {
+                setTimeout(function() {
+                    spinner.stop();
+                }, 10000);
+            }
+        }
 
 
 

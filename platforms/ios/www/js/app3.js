@@ -16,6 +16,10 @@ $(document).ready(function() {
     var postidArray = [];
 
 
+
+
+
+
                        
    userArrayLogged.length= 0;
     //fastclick 
@@ -507,6 +511,9 @@ $('.logohome').hide();
         //preview image
         $('#resultImage').attr('src', dataurl);
         $('#statusupdateform').addClass('adjustTextArea');
+       setTimeout(function(){
+        $('.cameraAlert').removeClass('slideLeft');
+    },50);
         //user submits selected photo
     }
 
@@ -524,7 +531,7 @@ $('.logohome').hide();
 
 
     function submitPic() {
-
+        spinFunction();
         var sendThis = $('#resultImage').attr('src');
         var parseFile = new Parse.File("mypic.jpg", {
             base64: sendThis
@@ -611,6 +618,7 @@ $('.logohome').hide();
 
     function getPostsOnLoad() {
 
+               
         $('#statusPost').empty();
         //get posts
         var register = Parse.Object.extend("cigarwall");
@@ -1449,8 +1457,7 @@ onDeviceReady();
     $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify, .closeTop, .indicatorsLeftNotify, .indicatorRecco, .infoicon').hide();
     $('#locatePage').show();
     $('#brandTitle').html('Locate a Cigar Bar or Shop');
-
-
+spinFunction();
 });
 
 
@@ -1469,7 +1476,37 @@ $('#myhumidoricon').on('click', function() {
 });
 
 
-
+        var spinFunction = function() {
+            var opts = {
+                lines: 10, // The number of lines to draw
+                length: 7, // The length of each line
+                width: 4, // The line thickness
+                radius: 10, // The radius of the inner circle
+                corners: 1, // Corner roundness (0..1)
+                rotate: 0, // The rotation offset
+                color: '#d19538', // #rgb or #rrggbb
+                speed: 1, // Rounds per second
+                trail: 60, // Afterglow percentage
+                shadow: false, // Whether to render a shadow
+                hwaccel: false, // Whether to use hardware acceleration
+                className: 'spinner', // The CSS class to assign to the spinner
+                zIndex: 9999999, // The z-index (defaults to 2000000000)
+                top: 25, // Top position relative to parent in px
+                left: 110 // Left position relative to parent in px
+            };
+            var target = document.getElementById('appContainer');
+            var loading;
+            loading = false;
+            if (loading == false) {
+                var spinner = new Spinner(opts).spin(target);
+            }
+            loading = true;
+            if (loading == true) {
+                setTimeout(function() {
+                    spinner.stop();
+                }, 10000);
+            }
+        }
 
 
 $(function() {
@@ -2029,6 +2066,7 @@ function onDeviceReady() {
 //
 function onSuccess(position) {
     $('#places').empty();
+
     var myLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
     map = new google.maps.Map(document.getElementById('geoLocation'), {
@@ -2058,7 +2096,7 @@ function callback(results, status, pagination) {
         return;
     } else {
         createMarkers(results);
-
+        $('.spinner').hide();
         if (pagination.hasNextPage) {
             var moreButton = document.getElementById('more');
 
