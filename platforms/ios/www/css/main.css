@@ -155,7 +155,7 @@ display: none;
     overflow:hidden!important;
 	position: absolute;
     padding-bottom: 60px;
-    top:55px;
+    padding-top:55px;
     
       
 }
@@ -899,7 +899,7 @@ ul#footercigar {
 
 
 li {
-    padding:10px;
+    padding:15px;
     color:#d19538;
     text-overflow:ellipsis;
     white-space:nowrap;
@@ -1229,9 +1229,36 @@ ul#places{
 .cigartitle {
     font-size:14px!important;
     font-weight:400;
-    padding-top:20px!important;
+    /*padding-top:20px!important;*/
     color:#d19538!important;
     letter-spacing:2px;
+}
+
+#cigardbWrapper li:active, #cigarslistNameWrapper ul li:active, .placelist:active{
+    background:#381f08;
+}
+
+#reccoCigs li:active, #topCigs li:active{
+    background: #000;
+}
+
+
+
+
+#cigarslistNameWrapper ul:first-child, #reccoCigs, #topCigs{
+ padding-top:10px;   
+}
+
+#reccolistWrapper ul, #toplistWrapper ul, #cigarslistWrapper ul{
+    padding-top:15px;
+}
+
+.commentsList, #commentBox{
+    padding-top:0px!important;
+}
+
+#reccoCigs, #topCigs{
+    padding-bottom:30px;
 }
 
 .cigarbrand {

@@ -415,7 +415,7 @@ $('#userPostWrapper ').empty();
         $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
         $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
         $('#locateicon').attr('src', 'img/locateicon.png').show();
-        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorsLeftNotify, .closeTop, .indicatorRecco, .infoicon').hide();
+        $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorsLeftNotify, .closeTop, .indicatorRecco, .infoicon, .spinner').hide();
         $('#statusUpdate, .statuscue').show();
         arraycigPosts.length = 0;
         console.log("this is arraycigs" + arraycigPosts.length);
@@ -909,10 +909,14 @@ alert("Posts are loading");
                 var LikesDatabase = Parse.Object.extend("LikesDatabase");
                 var queryremovelikes = new Parse.Query(LikesDatabase);
                 var closestID = $(this).parent().closest('.cigarpost').attr('id');
-
+                var currentUser = Parse.User.current();
+                var nameCurrent = currentUser.getUsername();
                 //console.log(closestID);
-                $(this).parent().closest('.cigarpost').find('.likeposted:last-child').remove();
-                $(this).parent().closest('.cigarpost').find('.likeposted:last-child').find('.comma:last-child').hide();
+                if ($(this).parent().closest('.cigarpost').find(".likeposted:contains('" + nameCurrent + "')").is(':last-child')) {
+                    $(this).parent().closest('.cigarpost').find(".likeposted:contains('" + nameCurrent + "')").prev('.likeposted').find('.comma').hide();
+
+                }
+                $(this).parent().closest('.cigarpost').find(".likeposted:contains('" + nameCurrent + "')").remove();
 
                 if( $(this).parent().parent().find('.likesbox').is(':empty')) {
                    
@@ -924,10 +928,14 @@ alert("Posts are loading");
 
                 queryremovelikes.descending("createdAt");
                 queryremovelikes.equalTo("postid", closestID);
-                queryremovelikes.first({
-                    success: function(object) {
-
+                queryremovelikes.find({
+                    success: function(results) {
+                         for (var i = 0; i < results.length; i++) {
+                            var object = results[i];
+                        if(object.get("username") === nameCurrent){
                         object.destroy();
+                        }
+                    }
                         //$('.likeposted:last-child').find('.comma').remove();
 
                         // The object was retrieved successfully.
@@ -1438,9 +1446,10 @@ $('#cigarlisticon').click(function() {
 
 
     $('.indicatorsLeft').removeClass('commentactive');
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop, .indicatorNotify, .indicatorsLeftNotify, .infoicon').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop, .indicatorNotify, .indicatorsLeftNotify, .infoicon, .spinner').hide();
     $('#cigardatabase, .indicatorsAdd').show();
     $('#brandTitle').html('Brands');
+
 
 });
 
@@ -1469,7 +1478,7 @@ $('#myhumidoricon').on('click', function() {
     $('#locateicon').attr('src', 'img/locateicon.png').show();
     $('#cigarlisticon').attr('src', 'img/cigarlist.png').show();
     $('#updateicon').attr('src', 'img/updateicon.png').show();
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify, .closeTop, .indicatorsLeftNotify, .indicatorRecco, .infoicon').hide();
+    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .indicatortopRated, .indicatorsLeftTop, .indicatorNotify, .closeTop, .indicatorsLeftNotify, .indicatorRecco, .infoicon, .spinner').hide();
     $('#listPage').show();
     $('#brandTitle').html('My Humidor');
 
