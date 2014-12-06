@@ -1518,6 +1518,8 @@ $('#myhumidoricon').on('click', function() {
         }
 
 
+
+
 $(function() {
     var availableTags = [
 
@@ -2133,6 +2135,16 @@ function createMarkers(places) {
     }
 
     $('.placelist').on('click', function() {
+
+
+    $(this).addClass('bgactive');
+    setTimeout(function(){
+    $('.placelist').removeClass('bgactive');
+
+    },800);
+
+
+
         placeNameArray.length = 0;
         placeVicinityArray.length = 0;
 

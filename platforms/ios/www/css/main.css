@@ -883,7 +883,7 @@ ul#footercigar {
 }
 
 /* location page */
-#results {
+/*#results {
     text-transform:none;
     font-size:14px;
     position:absolute;
@@ -895,9 +895,12 @@ ul#footercigar {
     overflow:scroll;
     background:rgba(0,0,0,0.4);
     -webkit-overflow-scrolling:touch;
+}*/
+
+#results{
+text-transform:none;
+    font-size:14px;
 }
-
-
 li {
     padding:15px;
     color:#d19538;
@@ -1203,18 +1206,20 @@ textarea#status {
     display:none;
 }
 
-ul#places{
-    padding-bottom:70px;
-}
+
 
 /* cigar feed*/
-#cigardbWrapper {
+#cigardbWrapper, #places {
     overflow:scroll;
     -webkit-overflow-scrolling:touch;
     height:100%;
     background:rgba(0,0,0,0.4);
    padding-top: 10px;
-   padding-bottom:70px;
+   padding-bottom:20px;
+}
+
+#cigarslistNameWrapper ul:last-child{
+    margin-bottom:25px;
 }
 
 #cigarslistWrapper li, #toplistWrapper li, #reccolistWrapper li {
@@ -1234,14 +1239,20 @@ ul#places{
     letter-spacing:2px;
 }
 
-#cigardbWrapper li:active, #cigarslistNameWrapper ul li:active, .placelist:active{
+/*#cigardbWrapper li:active, #cigarslistNameWrapper ul li:active, .placelist:active{
     background:#381f08;
 }
 
 #reccoCigs li:active, #topCigs li:active{
     background: #000;
+}*/
+.bgactive{
+    background:#381f08;
 }
 
+.bgactive2{
+    background:#000000;
+}
 
 
 

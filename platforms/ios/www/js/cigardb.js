@@ -46,8 +46,12 @@ var arraycigs = [];
 
 			//on click match brand with cigar listings
 			$('.cigarbrand').click(function() {
+				$(this).addClass('bgactive');
+				setTimeout(function() {
+					$('.cigarbrand').removeClass('bgactive');
 
-				$('#cigardatabase, .indicatortopRated, .indicatorRecco').hide();
+				}, 800);
+				$(' .indicatortopRated, .indicatorRecco').hide();
 				$('.indicatorsLeft, #cigarslistNameWrapper').show();
 				$('#cigardatabase').removeClass('level1');
 				$('#cigardatabase').addClass('level2');
@@ -56,6 +60,7 @@ var arraycigs = [];
 				$('#brandTitle').html(matchBrandName + ' Cigars');
 				setTimeout(function() {
 					$('#cigarslistNameWrapper').addClass('slideLeft');
+					$('#cigardatabase').hide();
 				}, 200);
 				for (var i = 0; i < results.length; i++) {
 					var object = results[i];
@@ -69,14 +74,21 @@ var arraycigs = [];
 				}
 				//on click match cigar with cigar name
 				$('.cigartitle').click(function() {
+				
+				$(this).addClass('bgactive');
+				setTimeout(function() {
+					$('.cigartitle').removeClass('bgactive');
+
+				}, 800);					
 					arraycigs.length = 0;
 					$('#cigardatabase').removeClass('level2');
 					$('#cigardatabase').addClass('level3');
-					$('#cigarslistNameWrapper').hide();
+					//$('#cigarslistNameWrapper').hide();
 					$('#cigarslistWrapper').show();
 					$('#cigarslistWrapper').empty();
 					setTimeout(function() {
 						$('#cigarslistWrapper').addClass('slideLeft');
+						$('#cigarslistNameWrapper').hide();
 					}, 200);
 					$('.indicatorsLeft').addClass('titleactive');
 					var matchThisTitle = $(this).attr('data-name-cigar');
@@ -513,6 +525,11 @@ if(topName === topName){
             }
 
                 $('#topCigs li.cigartitle').click(function(){
+               $(this).addClass('bgactive2');
+				setTimeout(function() {
+					$('#topCigs li.cigartitle').removeClass('bgactive2');
+
+				}, 800);	
                 	arraycigs.length = 0;
 					$('#toplistWrapper').show();
 					$('#toplistWrapper').empty();
@@ -822,7 +839,11 @@ strengthFinalString.push(maxEl);
 
  
                 $('#reccoCigs li.cigartitle').click(function(){
-                
+ 				$(this).addClass('bgactive2');
+				setTimeout(function() {
+					$('#reccoCigs li.cigartitle').removeClass('bgactive2');
+
+				}, 800);               
                 	arraycigs.length = 0;
 					$('#reccolistWrapper').show();
 					$('#reccolistWrapper').empty();
