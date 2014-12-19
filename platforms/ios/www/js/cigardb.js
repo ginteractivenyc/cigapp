@@ -29,6 +29,7 @@ var arraycigs = [];
 				var strength = object.get("strength");
 				var wrapper = object.get("wrapper");
 				var origin = object.get("origin");
+
 				$('#cigarslistWrapper').append('<ul class="cigarlisting" data-matchthis="' + cigarBrand + '">' + '<li class="cigarbrand">' + cigarBrand + '</li>' + '<li class="cigarbrand">' + cigar + '</li>' + '<li class="cigarbrand">' + strength + '</li>' + '<li class="cigarbrand">' + wrapper + '</li>' + '<li class="cigarbrand">' + origin + '</li>' + '</ul>');
 				//$('#cigardbWrapper').append('<li class="cigarbrand"' + 'data-brandname="' + cigarBrand + '">'+ cigarBrand + '</li>');
 				cigarbrandArray.push(cigarBrand);
@@ -65,10 +66,11 @@ var arraycigs = [];
 				for (var i = 0; i < results.length; i++) {
 					var object = results[i];
 					var cigar = object.get("cigar");
+				    var cigId = object.id;
 					var cigarBrand = object.get("cigarBrand");
 					if (cigarBrand == matchBrandName) {
 
-						$('#cigarslistNameWrapper').append('<ul>' + '<li class="cigartitle" data-name-cigar="' + cigar + '"' + 'data-brand-cigar="' + cigarBrand + '"' + '>' + cigar + '</li>' + '</ul>');
+						$('#cigarslistNameWrapper').append('<ul>' + '<li class="cigartitle" data-name-cigar="' + cigar + '"' + 'data-brand-cigar="' + cigarBrand + '"'  + 'data-id-cigar="' + cigId + '"'   + '>' + cigar + '</li>' + '</ul>');
 
 					}
 				}
@@ -95,7 +97,7 @@ var arraycigs = [];
 					var matchThisBrand = $(this).attr('data-brand-cigar');
 					var nameofBrand = $(this).attr('data-brand-cigar');
 					var nameofCigar = $(this).attr('data-name-cigar');
-					querycigarList.equalTo("cigarBrand", matchThisBrand);
+					var cigarId = $(this).attr('data-id-cigar');
 
 					for (var i = 0; i < results.length; i++) {
 						var object = results[i];
@@ -104,14 +106,14 @@ var arraycigs = [];
 						var cigarWrapper = object.get("wrapper");
 						var cigarStrength = object.get("strength");
 						var cigarOrigin = object.get("origin");
+						var cigId = object.id;
 
-						if (cigarName == matchThisTitle && cigarBrand == matchThisBrand) {
-
+						if (cigarId === cigId ) {
 							$('#cigarslistWrapper').append('<ul>' + '<li class="cigartitle" data-name-cigar="' + cigarName + '"' + 'data-name-brand="' + cigarBrand + '"' + 'data-strength="' + cigarStrength + '">' + cigarName + '</li>' + '<li>' + '<span class="cigarsubs">' + 'wrapper: ' + '</span>' + cigarWrapper + '</li>' + '<li>' + '<span class="cigarsubs">' + 'strength: ' + '</span>' + cigarStrength + '</li>' + '<li class="cigarsubs">' + '<span class="cigarsubs">' + 'origin: ' + '</span>' + cigarOrigin + '</li>' + '<li class="ratingwrapper cigarlast">' + '<span class="cigarrate">' + 'Rating:' + '</span>' + '<div class="rating-container" data-id="' + cigarName + '">' +
 								' <img class="star" data-rating="1" src="img/cigar.png?v=4">' + ' <img class="star" data-rating="2" src="img/cigar.png?v=4">' + ' <img class="star" data-rating="3" src="img/cigar.png?v=4">' + ' <img class="star" data-rating="4" src="img/cigar.png?v=4">' + ' <img class="star" data-rating="5" src="img/cigar.png?v=4">' + '</div>' + '</li>' + '</ul>');
 							 $('#cigarslistWrapper').append('<ul id="commentBox">' +'<li>' + '<img src="img/commentBtn2.png" class="reviewicon">' + '<span class="cigarsubs">' + 'Reviews: ' + '</span>'  + '<ul class="commentsList">' + '</ul>' + '</li>'  + '</ul>');
 
-
+							 
 
 					//add a review
 					setTimeout(function(){
