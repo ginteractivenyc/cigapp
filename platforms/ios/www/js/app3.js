@@ -553,7 +553,10 @@ $('.logohome').hide();
                     var postupdate = cigarWall.get('statusupdate');
                     //$('#fileselect').attr('data-change', 'false');
                     $('#statusInnerWrapper').removeClass('slideLeft');
-                    location.reload();
+
+                   // location.reload();
+                  getPostsOnLoad();
+                 $('.spinner').hide();
 
 
 
@@ -1217,10 +1220,13 @@ function userNotification(){
 
 
     function getLikes() {
-
         //get user like
-        var LikesDatabase = Parse.Object.extend("LikesDatabase");
+
+            var equalId = $('.cigarpost').attr('id');
+    var LikesDatabase = Parse.Object.extend("LikesDatabase");
         var querylikes = new Parse.Query(LikesDatabase);
+        querylikes.descending("createdAt");
+        //querylikes.equalTo(equalId);
         querylikes.find({
             success: function(results) {
                 for (var i = 0; i < results.length; i++) {
@@ -1228,6 +1234,7 @@ function userNotification(){
                     var likeuser = object.get("username");
                     //var likes = object.get("userlikes");
                     var postidget = object.get("postid");
+                    console.log(postidget)
                    $('#' + postidget).find('.likeicon, .likesbox').show();
 
                     $('#' + postidget).find('.likesbox').append('<div class="likeposted">' + '<div class="likeUser">' + likeuser + '<span class="comma">,</span>' + '</div>' + '</div>');
@@ -1245,11 +1252,16 @@ function userNotification(){
                 // The object was retrieved successfully.
             },
             error: function(object, error) {
+                console.log(object)
                 // The object was not retrieved successfully.
                 // error is a Parse.Error with an error code and description.
             }
-        });
+     
+     
 
+
+        });
+       
     }
 
 
@@ -1433,25 +1445,6 @@ var myTruncatedNameString = mynameString.substring(0,lengthName);
 
 
 
-$('#cigarlisticon').click(function() {
-
-    $('#cigarslistNameWrapper, #cigarslistWrapper').removeClass('slideLeft');
-    $(this).attr('src', 'img/cigarlisthover.png').show();
-    $(this).parent().addClass('footeractive');
-    $('#locateicon, #updateicon, #myhumidoricon').parent().removeClass('footeractive');
-    $('#locateicon').attr('src', 'img/locateicon.png').show();
-    $('#myhumidoricon').attr('src', 'img/myhumidor.png').show();
-    $('#updateicon').attr('src', 'img/updateicon.png').show();
-    $('.indicatortopRated, .indicatorRecco').show();
-
-
-    $('.indicatorsLeft').removeClass('commentactive');
-    $('.mainsection, .statuscue, .indicatorsLeft, .indicatorsAdd, .closeTop, .indicatorsLeftTop, .indicatorNotify, .indicatorsLeftNotify, .infoicon, .spinner').hide();
-    $('#cigardatabase, .indicatorsAdd').show();
-    $('#brandTitle').html('Brands');
-
-
-});
 
 
 $('#locateicon').on('click', function() {
